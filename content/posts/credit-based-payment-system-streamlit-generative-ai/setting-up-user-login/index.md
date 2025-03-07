@@ -1,12 +1,12 @@
 ---
 title: "Setting Up User Login"
 date: 2025-02-28
-summary: "User authentication is the first step to building any app that needs to know who's who — like one with user credits 👀 — and with Streamlit's new native authentication features, it's easier than ever!"
+summary: "User authentication is the first step in building any app that needs to track who's who — like one with user credits 👀 — and with Streamlit's new native authentication features, it's easier than ever!"
 weight: 10
 ---
 
 {{<lead>}}
-User authentication is the first step to building any app that needs to know who's who — like one with user credits 👀 — and with Streamlit's new native authentication features, it's easier than ever!
+User authentication is the first step in building any app that needs to track who's who — like one with user credits 👀 — and with Streamlit's new native authentication features, it's easier than ever!
 {{</lead>}}
 
 <!-- Series blurb -->
@@ -23,7 +23,7 @@ So, why bother with user authentication when all we want is a credit system? Wel
 Before we jump in, make sure you have the following ready:
 
 - **Streamlit version >= 1.42.0:** The native authentication features are available from this version onward. Check your version with `streamlit --version`.
-- **Authlib >= 1.3.2:** This library is required to use Streamlit's native authentication feautures. Install it with `pip install Authlib`.
+- **Authlib >= 1.3.2:** This library is required to use Streamlit's native authentication features. Install it with `pip install Authlib`.
 
 Once you’ve got these sorted, you’re ready to set up authentication!
 
@@ -33,7 +33,7 @@ Streamlit now offers a straightforward way to handle user logins. You can read m
 
 ### Configure Your Identity Provider
 
-Identity providers handle the heavy lifting of user authentication and security — so you don't have to manage passwords or other sensitive details yourself. Streamlit supports any provider using OpenID Connect (OIDC) (I am not sure what it is either), but in this tutorial we will use Google Identity. Why? Well, it's straightforward to set up and widely used. But yes, it does mean people will need a Google account to sign up to our app, if that is a problem for you, you can look into [other providers](https://docs.streamlit.io/develop/concepts/connections/authentication#openid-connect), such as [Auth0](https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps).
+Identity providers handle the heavy lifting of user authentication and security — so you don't have to manage passwords or other sensitive details yourself. Streamlit supports any provider using OpenID Connect (OIDC), but in this tutorial we will use Google Identity. Why? Well, it's straightforward to set up and widely used. However, this does mean users will need a Google account to sign up for our app. If that’s a problem, you can explore [other providers](https://docs.streamlit.io/develop/concepts/connections/authentication#openid-connect), such as [Auth0](https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps).
 
 Let's walk through the process of setting up Google as your identity provider:
 
@@ -60,15 +60,15 @@ Let's walk through the process of setting up Google as your identity provider:
         - **User support email:** Your email address
         - Select **"External"** as the user type (unless you're building an internal app for a Google Workspace organization)
         - **Developer contact information:** Your email address
-      - Under **"Google Auth Platform / Audience"**, go to "Test Users" and add the google account you will use for testing.
+      - Under **"Google Auth Platform / Audience"**, go to "Test Users" and add the Google account you will use for testing.
       - Under **"Google Auth Platform / Data access"**, click "Add or remove scopes" and select the scope `.../auth/userinfo.email`, which means we will have access to our users' email address, then click "Update".
       - Now return to **"Credentials"** and click "Create Credentials > OAuth client ID" again
       - For "Application type," select **"Web application"**
       - Fill in the required information:
-        - **Name of your oauth client**, I named mine `web_client_projectname`.
+        - **Name of your OAuth client**, I named mine `web_client_projectname`.
         - Under **"Authorized JavaScript origins"**, add `http://localhost:8501`
         - Under **"Authorized redirect URIs"**, add `http://localhost:8501/oauth2callback`
-      {{<alert>}}Once we [deploy our app]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app">}}), we will have to add our live domain the authorized origins and redirect URIs.{{</alert>}}
+      {{<alert>}}Once we [deploy our app]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app">}}), we will have to add our live domain to the authorized origins and redirect URIs.{{</alert>}}
       - Click **"Create Client"**
       - Copy paste your **client secret** and **client ID**, we will need them soon! You can find them again under "Google Auth Platform / Clients" and then clicking on the client you just created.
 
@@ -78,7 +78,7 @@ The consent screen is initially in "Testing" mode with restrictions on the numbe
 
 Now that we're all set up on Google's side, we need to let our Streamlit app know! To use native authentication, Streamlit expects some information in the `secrets.toml` file. Remember those client secret and client id? This is where we use them.
 
-{{<alert>}} Make sure you never publish your secrets (e.g. do not commit them to GitHub). Always include `secrets.toml` in your `.gitignore` file. Read more about secrets management [here](https://docs.streamlit.io/develop/concepts/connections/secrets-management). {{</alert>}}
+{{<alert>}} Make sure never to publish your secrets (e.g., avoid committing them to GitHub). Always include `secrets.toml` in your `.gitignore` file. Read more about secrets management [here](https://docs.streamlit.io/develop/concepts/connections/secrets-management). {{</alert>}}
 
 Your `secrets.toml` file should look like this:
 
@@ -105,7 +105,7 @@ import streamlit as st
 with st.sidebar:
   if not st.experimental_user.is_logged_in:
       st.button("Log in", on_click=st.login, args=("google"))
-      st.stop()
+      st.stop() # Stop further execution if user is not logged in.
 
   st.button("Log out", on_click=st.logout, args=("google"))
 
@@ -118,7 +118,7 @@ After implementing the login functionality, it’s time to test it out. Run your
 
 ## Next Steps
 
-With user authentication in place, we can put a ~name~ _email address_ to ~people's faces~ _credit balance system_. Next, we’ll look at how to [connect to a database]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database">}}).
+With user authentication in place, we can associate an email address with each user's credit balance. Next, we’ll look at how to [connect to a database]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database">}}).
 
 {{<alert "lightbulb">}}
 Want to see an example? [SimplyPlot](https://simplyplot.streamlit.app/) uses a credit system for monetisation - it writes Matplotlib code for you, so you can stop troubleshooting your plots.
