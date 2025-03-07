@@ -6,7 +6,7 @@
     <description>Recent content in Build a Credit Payment System in Streamlit for Gen AI Apps on Antoine Basseto&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 06 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting Up User Login</title>
@@ -20,26 +20,26 @@
       <link>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/</link>
       <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/</guid>
-      <description>Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.</description>
+      <description>Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.</description>
     </item>
     <item>
       <title>Integrating Stripe Checkouts</title>
       <link>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/integrating-stripe-checkouts/</link>
       <pubDate>Thu, 06 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/integrating-stripe-checkouts/</guid>
-      <description></description>
+      <description>Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks.</description>
     </item>
     <item>
       <title>Calling LLM APIs</title>
       <link>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/</guid>
-      <description></description>
+      <description>Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.</description>
     </item>
     <item>
       <title>Deploying Your App</title>
       <link>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/</guid>
       <description>You’ve built something awesome — now it’s time to share it with the world! Learn the ins and outs of deploying your Streamlit app on Streamlit Cloud, it&amp;rsquo;s (almost) as simple as a single click.</description>
     </item>

@@ -72,7 +72,7 @@
     name="description"
     content="
       
-        Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.
+        Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.
       
     "
   />
@@ -97,7 +97,7 @@
   <meta property="og:url" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/">
   <meta property="og:site_name" content="Antoine Basseto&#39;s Blog">
   <meta property="og:title" content="Connecting To A Database">
-  <meta property="og:description" content="Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.">
+  <meta property="og:description" content="Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -109,18 +109,18 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/feature.png">
   <meta name="twitter:title" content="Connecting To A Database">
-  <meta name="twitter:description" content="Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.">
+  <meta name="twitter:description" content="Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.">
 
   
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "articleSection": "",
+    "articleSection": "Blog Posts",
     "name": "Connecting To A Database",
     "headline": "Connecting To A Database",
     
-    "abstract": "Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.",
+    "abstract": "Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/blog\/posts\/credit-based-payment-system-streamlit-generative-ai\/connecting-to-a-database\/",
     "author" : {
@@ -136,7 +136,7 @@
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "897"
+    "wordCount": "65"
   }
   </script>
     
@@ -155,7 +155,7 @@
      {
        "@type": "ListItem",
        "item": "http://localhost:1313/blog/posts/",
-       "name": "",
+       "name": "Blog Posts",
        "position": 2
      },
      {
@@ -232,7 +232,7 @@
               
                 <a
                   href="/blog/posts/"
-                  title=""
+                  title="Blog Posts"
                   
                   ><span
                       class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
@@ -320,7 +320,7 @@
     <a
       class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
       href="/blog/posts/"
-      >posts</a
+      >Blog Posts</a
     ><span class="px-1 text-primary-500">/</span>
   </li>
 
@@ -404,6 +404,15 @@
 
     
     
+      <span class="ps-2"><span class="flex">
+  <span
+    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    Draft
+  </span>
+</span>
+</span>
+    
   </div>
 
   
@@ -477,40 +486,20 @@
     </header>
     <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
       
-        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
-          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
-            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
-  <summary
-    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
-  >
-    Table of Contents
-  </summary>
-  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#why-do-we-need-a-database">Why Do We Need A Database?</a></li>
-    <li><a href="#which-database-should-i-choose">Which Database Should I Choose?</a></li>
-    <li><a href="#requirements">Requirements</a></li>
-    <li><a href="#connecting-to-a-database">Connecting To A Database</a>
-      <ul>
-        <li><a href="#configuring-your-supabase-project">Configuring Your Supabase Project</a></li>
-        <li><a href="#connecting-to-your-database">Connecting To Your Database</a></li>
-      </ul>
-    </li>
-    <li><a href="#create-users-as-they-connect">Create users as they connect</a></li>
-    <li><a href="#testing-your-database-setup">Testing Your Database Setup</a></li>
-    <li><a href="#next-steps">Next Steps</a></li>
-  </ul>
-</nav>
-  </div>
-</details>
-
-          </div>
-        </div>
-      
       <div class="min-h-0 min-w-0 max-w-prose grow">
-        <div class="lead !mb-9 text-xl">
-  Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.
+        <span class="flex">
+  <span
+    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    
+Draft
+
+  </span>
+</span>
+
+
+<div class="lead !mb-9 text-xl">
+  Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.
 </div>
 
 <!-- Series blurb -->
@@ -522,56 +511,62 @@
   <span class="dark:text-neutral-300">This post is <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/" target="_blank" rel="noreferrer">part of a series</a> to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.</span>
 </div>
 
-<h2 id="why-do-we-need-a-database" class="relative group">Why Do We Need A Database? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-do-we-need-a-database" aria-label="Anchor">#</a></span></h2><p>Databases are the backbone of any dynamic application. In our case, we need to store and manage the credit balances of our users efficiently. Whether you’re updating credits after a transaction or querying the current balance, a database provides the reliability and performance necessary to keep everything in sync.</p>
-<h2 id="which-database-should-i-choose" class="relative group">Which Database Should I Choose? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#which-database-should-i-choose" aria-label="Anchor">#</a></span></h2><p>There are a lot of options out there, and most would work just fine. For this project, I’ve chosen Supabase. It offers a generous free tier, is easy to set up, and integrates seamlessly with Streamlit. The decision ultimately comes down to deployment needs and the flexibility Supabase offers for modern apps.</p>
-<p>Comparison + about supabase free tier (table)</p>
-<h2 id="requirements" class="relative group">Requirements <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#requirements" aria-label="Anchor">#</a></span></h2><p>add login</p>
-<p>Before you start, install the necessary package with <code>pip install st-supabase-connection</code>.</p>
-<h2 id="connecting-to-a-database" class="relative group">Connecting To A Database <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#connecting-to-a-database" aria-label="Anchor">#</a></span></h2><h3 id="configuring-your-supabase-project" class="relative group">Configuring Your Supabase Project <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configuring-your-supabase-project" aria-label="Anchor">#</a></span></h3><ul>
-<li>Sign up to <a href="https://supabase.com" target="_blank" rel="noreferrer">Supabase</a> and create a free account.</li>
-<li>Create a new project by filling out the required information:
-<ul>
-<li>project name</li>
-<li>database password</li>
-<li>region (closest to your users)</li>
-<li>Click &ldquo;Create new project&rdquo;</li>
-</ul>
-</li>
-<li>In the left sidebar, click &ldquo;Table Editor&rdquo;, click &ldquo;Create a new table&rdquo; and fill out the required information:
-<ul>
-<li>Name: the name of the table, we will use <code>users</code>, if you decide to use something else just make sure to adpat the code examples accordingly</li>
-<li>Description: optional</li>
-<li>Keep &ldquo;Enable Row Level Security (RLS)&rdquo; checked.</li>
-<li>Edit columns so you have the following:
-<ul>
-<li>id, int8, set as primary key</li>
-<li>created_at, timestamptz, with default value <code>now()</code></li>
-<li>email, text, click the gear icon, uncheck &ldquo;Is Nullable&rdquo; and check &ldquo;Is Unique&rdquo;</li>
-<li>credits, int4 (max value is 2147483647, i.e. more than $21 million because we will store cents), click the gear icon, uncheck &ldquo;Is Nullable&rdquo;, set <code>0</code> as the default value</li>
-</ul>
-</li>
-<li>Click &ldquo;Save&rdquo;</li>
-</ul>
-</li>
-<li>In the left sidebar, click &ldquo;Project overview&rdquo;, scroll down a bit, this is where you can find the <code>Project URL</code> and <code>API Key</code>, you will need them soon.</li>
-</ul>
-<p>RLS Policies</p>
-<ul>
-<li>In the left sidebar, click &ldquo;Authentication&rdquo;, select &ldquo;Policies&rdquo; if it&rsquo;s not already selected, and click &ldquo;Create policy&rdquo;.</li>
-<li>Create one policies from the templates &ldquo;Enable insert for authenticated users only&rdquo;</li>
-<li>Click on the policy template &ldquo;Enable read access for all users&rdquo;, rename it &ldquo;Enable read access for authenticated users only&rdquo;, select <code>authenticated</code> for target roles, click on &ldquo;Save policy&rdquo;.</li>
-<li>Enable update policy</li>
-<li>Still in &ldquo;Authentication&rdquo;, click on &ldquo;Users&rdquo; in the left sidebar. These are the Supabase users, not your app users, they are used to determine who has the right to which policy with RLS.</li>
-<li>Click on &ldquo;Add user &gt; Create a new user&rdquo;, put in an email address and a password of your choice, leave &ldquo;auto confirm user&rdquo; checked on and click &ldquo;create user&rdquo;</li>
-<li>Keep your email address and password available, you will need them soon.</li>
-</ul>
-<p>Sign Up and Create a Project:
+<!--
+## Why Do We Need A Database?
+
+Databases are the backbone of any dynamic application. In our case, we need to store and manage the credit balances of our users efficiently. Whether you’re updating credits after a transaction or querying the current balance, a database provides the reliability and performance necessary to keep everything in sync.
+
+## Which Database Should I Choose?
+
+There are a lot of options out there, and most would work just fine. For this project, I’ve chosen Supabase. It offers a generous free tier, is easy to set up, and integrates seamlessly with Streamlit. The decision ultimately comes down to deployment needs and the flexibility Supabase offers for modern apps.
+
+Comparison + about supabase free tier (table)
+
+## Requirements
+
+add login
+
+Before you start, install the necessary package with `pip install st-supabase-connection`.
+
+## Connecting To A Database
+
+### Configuring Your Supabase Project
+
+- Sign up to [Supabase](https://supabase.com) and create a free account.
+- Create a new project by filling out the required information:
+  - project name
+  - database password
+  - region (closest to your users)
+  - Click "Create new project"
+- In the left sidebar, click "Table Editor", click "Create a new table" and fill out the required information:
+  - Name: the name of the table, we will use `users`, if you decide to use something else just make sure to adpat the code examples accordingly
+  - Description: optional
+  - Keep "Enable Row Level Security (RLS)" checked.
+  - Edit columns so you have the following:
+    - id, int8, set as primary key
+    - created_at, timestamptz, with default value `now()`
+    - email, text, click the gear icon, uncheck "Is Nullable" and check "Is Unique"
+    - credits, int4 (max value is 2147483647, i.e. more than $21 million because we will store cents), click the gear icon, uncheck "Is Nullable", set `0` as the default value
+  - Click "Save"
+- In the left sidebar, click "Project overview", scroll down a bit, this is where you can find the `Project URL` and `API Key`, you will need them soon.
+
+RLS Policies
+
+- In the left sidebar, click "Authentication", select "Policies" if it's not already selected, and click "Create policy".
+- Create one policies from the templates "Enable insert for authenticated users only"
+- Click on the policy template "Enable read access for all users", rename it "Enable read access for authenticated users only", select `authenticated` for target roles, click on "Save policy".
+- Enable update policy
+- Still in "Authentication", click on "Users" in the left sidebar. These are the Supabase users, not your app users, they are used to determine who has the right to which policy with RLS.
+- Click on "Add user > Create a new user", put in an email address and a password of your choice, leave "auto confirm user" checked on and click "create user"
+- Keep your email address and password available, you will need them soon.
+
+Sign Up and Create a Project:
 Visit Supabase and sign up for a free account.
 Click “Create new project” and fill in:
 Project Name: Pick something memorable.
 Database Password: Choose a strong password.
 Region: Select the region closest to your users.
-Click &ldquo;Create new project&rdquo;.
+Click "Create new project".
 Create Your Table:
 In the left sidebar, click Table Editor.
 Click Create a new table and fill in the following:
@@ -581,8 +576,8 @@ Enable Row Level Security (RLS): Keep this checked.
 Edit Columns to include:
 id: Type int8 and set as the primary key.
 created_at: Type timestamptz with a default value of now().
-email: Type text. Click the gear icon, uncheck &ldquo;Is Nullable&rdquo; and check &ldquo;Is Unique&rdquo;.
-credits: Type int4 (max value 2147483647, which is more than enough since we store cents). Click the gear icon, uncheck &ldquo;Is Nullable&rdquo;, and set the default value to 0.
+email: Type text. Click the gear icon, uncheck "Is Nullable" and check "Is Unique".
+credits: Type int4 (max value 2147483647, which is more than enough since we store cents). Click the gear icon, uncheck "Is Nullable", and set the default value to 0.
 Click Save.
 Get Your Project Credentials:
 In the left sidebar, click Project overview.
@@ -592,24 +587,31 @@ In the left sidebar, click Authentication, then select Policies.
 Click Create policy and choose the template Enable insert for authenticated users only.
 Next, select the template Enable read access for all users, rename it to Enable read access for authenticated users only, set the target role to authenticated, and click Save policy.
 Still under Authentication, click Users in the left sidebar.
-Click Add user &gt; Create a new user, enter an email address and a password of your choice, ensure auto confirm user is checked, then click create user.
-Keep these credentials handy for your connection.</p>
-<h3 id="connecting-to-your-database" class="relative group">Connecting To Your Database <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#connecting-to-your-database" aria-label="Anchor">#</a></span></h3><p>In your <code>secrets.toml</code> file, add the following section:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">connections</span><span class="p">.</span><span class="nx">supabase</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">SUPABASE_URL</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">SUPABASE_KEY</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">EMAIL_ADDRESS</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nx">PASSWORD</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
-</span></span></code></pre></div><div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
+Click Add user > Create a new user, enter an email address and a password of your choice, ensure auto confirm user is checked, then click create user.
+Keep these credentials handy for your connection.
+
+### Connecting To Your Database
+
+In your `secrets.toml` file, add the following section:
+
+```toml
+[connections.supabase]
+SUPABASE_URL = "xxxx"
+SUPABASE_KEY = "xxxx"
+EMAIL_ADDRESS = "xxxx"
+PASSWORD = "xxxx"
+```
+
+<div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
   <span class="pe-3 text-primary-400">
     <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
 </span>
   </span>
   <span class="dark:text-neutral-300">Make sure you never publish your secrets, do not commit them to GitHub! Always include <code>secrets.toml</code> in your <code>.gitignore</code> file. Read more about secrets management <a href="https://docs.streamlit.io/develop/concepts/connections/secrets-management" target="_blank" rel="noreferrer">here</a>.</span>
 </div>
-
+ -->
 <!-- markdownlint-disable -->
-<div class="highlight"><div class="chroma">
+<!-- <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="hl"><span class="lnt"> 2
@@ -636,10 +638,16 @@ Keep these credentials handy for your connection.</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div> -->
 <!-- markdownlint-enable -->
-<p>Explain caching and ttl.</p>
-<h2 id="create-users-as-they-connect" class="relative group">Create users as they connect <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#create-users-as-they-connect" aria-label="Anchor">#</a></span></h2><h2 id="testing-your-database-setup" class="relative group">Testing Your Database Setup <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#testing-your-database-setup" aria-label="Anchor">#</a></span></h2><h2 id="next-steps" class="relative group">Next Steps <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#next-steps" aria-label="Anchor">#</a></span></h2>
+<!-- Explain caching and ttl.
+
+## Create users as they connect
+
+## Testing Your Database Setup
+
+## Next Steps -->
+
       </div>
     </section>
     <footer class="max-w-prose pt-8 print:hidden">

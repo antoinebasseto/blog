@@ -72,7 +72,7 @@
     name="description"
     content="
       
-        
+        Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.
       
     "
   />
@@ -97,42 +97,46 @@
   <meta property="og:url" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/">
   <meta property="og:site_name" content="Antoine Basseto&#39;s Blog">
   <meta property="og:title" content="Calling LLM APIs">
+  <meta property="og:description" content="Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-07T00:00:00+00:00">
     <meta property="og:image" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/feature.png">
 
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/feature.png">
   <meta name="twitter:title" content="Calling LLM APIs">
+  <meta name="twitter:description" content="Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.">
 
   
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "articleSection": "",
+    "articleSection": "Blog Posts",
     "name": "Calling LLM APIs",
     "headline": "Calling LLM APIs",
     
-    
+    "abstract": "Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/blog\/posts\/credit-based-payment-system-streamlit-generative-ai\/calling-llm-apis\/",
     "author" : {
       "@type": "Person",
       "name": "Antoine Basseto"
     },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-03-07T00:00:00\u002b00:00",
+    "datePublished": "2025-03-07T00:00:00\u002b00:00",
     
-    
-    
-    
-    
+    "dateModified": "2025-03-07T00:00:00\u002b00:00",
     
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "64"
+    "wordCount": "56"
   }
   </script>
     
@@ -151,7 +155,7 @@
      {
        "@type": "ListItem",
        "item": "http://localhost:1313/blog/posts/",
-       "name": "",
+       "name": "Blog Posts",
        "position": 2
      },
      {
@@ -228,7 +232,7 @@
               
                 <a
                   href="/blog/posts/"
-                  title=""
+                  title="Blog Posts"
                   
                   ><span
                       class="decoration-primary-500 group-hover:underline group-hover:decoration-2 group-hover:underline-offset-2"
@@ -316,7 +320,7 @@
     <a
       class="dark:underline-neutral-600 decoration-neutral-300 hover:underline"
       href="/blog/posts/"
-      >posts</a
+      >Blog Posts</a
     ><span class="px-1 text-primary-500">/</span>
   </li>
 
@@ -379,7 +383,7 @@
   <div class="flex flex-row flex-wrap items-center">
     
     
-      <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">1 January 0001</time><span class="px-2 text-primary-500">&middot;</span>
+      <time datetime="2025-03-07 00:00:00 &#43;0000 UTC">7 March 2025</time><span class="px-2 text-primary-500">&middot;</span>
 
 
   
@@ -399,6 +403,15 @@
     
 
     
+    
+      <span class="ps-2"><span class="flex">
+  <span
+    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    Draft
+  </span>
+</span>
+</span>
     
   </div>
 
@@ -473,42 +486,23 @@
     </header>
     <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
       
-        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
-          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
-            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
-  <summary
-    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
-  >
-    Table of Contents
-  </summary>
-  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#why-are-we-talking-about-this">Why Are We Talking About This</a></li>
-    <li><a href="#requirements">Requirements</a>
-      <ul>
-        <li><a href="#choosing-llm-provider">Choosing LLM Provider</a></li>
-      </ul>
-    </li>
-    <li><a href="#calling-an-llm-api">Calling an LLM API</a>
-      <ul>
-        <li><a href="#setting-up-your-account">Setting Up Your Account</a></li>
-        <li><a href="#making-api-requests">Making API Requests</a></li>
-        <li><a href="#consuming-credits-properly">Consuming Credits Properly</a></li>
-      </ul>
-    </li>
-    <li><a href="#testing-your-consumption-workflow">Testing Your Consumption Workflow</a></li>
-    <li><a href="#next-steps">Next Steps</a></li>
-  </ul>
-</nav>
-  </div>
-</details>
-
-          </div>
-        </div>
-      
       <div class="min-h-0 min-w-0 max-w-prose grow">
-        <!-- Series blurb -->
+        <span class="flex">
+  <span
+    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    
+Draft
+
+  </span>
+</span>
+
+
+<div class="lead !mb-9 text-xl">
+  Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users.
+</div>
+
+<!-- Series blurb -->
 <div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
   <span class="pe-3 text-primary-400">
     <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
@@ -517,8 +511,28 @@
   <span class="dark:text-neutral-300">This post is <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/" target="_blank" rel="noreferrer">part of a series</a> to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.</span>
 </div>
 
-<h2 id="why-are-we-talking-about-this" class="relative group">Why Are We Talking About This <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-are-we-talking-about-this" aria-label="Anchor">#</a></span></h2><p>how to calculate costs.</p>
-<h2 id="requirements" class="relative group">Requirements <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#requirements" aria-label="Anchor">#</a></span></h2><h3 id="choosing-llm-provider" class="relative group">Choosing LLM Provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choosing-llm-provider" aria-label="Anchor">#</a></span></h3><h2 id="calling-an-llm-api" class="relative group">Calling an LLM API <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#calling-an-llm-api" aria-label="Anchor">#</a></span></h2><h3 id="setting-up-your-account" class="relative group">Setting Up Your Account <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#setting-up-your-account" aria-label="Anchor">#</a></span></h3><h3 id="making-api-requests" class="relative group">Making API Requests <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#making-api-requests" aria-label="Anchor">#</a></span></h3><h3 id="consuming-credits-properly" class="relative group">Consuming Credits Properly <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#consuming-credits-properly" aria-label="Anchor">#</a></span></h3><h2 id="testing-your-consumption-workflow" class="relative group">Testing Your Consumption Workflow <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#testing-your-consumption-workflow" aria-label="Anchor">#</a></span></h2><h2 id="next-steps" class="relative group">Next Steps <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#next-steps" aria-label="Anchor">#</a></span></h2>
+<!-- Series blurb -->
+<!-- 
+## Why Are We Talking About This
+
+how to calculate costs.
+
+## Requirements
+
+### Choosing LLM Provider
+
+## Calling an LLM API
+
+### Setting Up Your Account
+
+### Making API Requests
+
+### Consuming Credits Properly
+
+## Testing Your Consumption Workflow
+
+## Next Steps -->
+
       </div>
     </section>
     <footer class="max-w-prose pt-8 print:hidden">
@@ -724,7 +738,7 @@
                 >
                 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
                   
-                    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">1 January 0001</time>
+                    <time datetime="2025-03-07 00:00:00 &#43;0000 UTC">7 March 2025</time>
                   
                 </span>
               </span>

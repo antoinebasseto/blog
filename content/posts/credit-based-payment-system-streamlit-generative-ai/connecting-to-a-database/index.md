@@ -1,12 +1,17 @@
 ---
 title: "Connecting To A Database"
 date: 2025-03-03
-summary: "Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough."
+summary: "Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough."
 weight: 20
+draft: true
 ---
 
+{{<badge>}}
+Draft
+{{</badge>}}
+
 {{<lead>}}
-Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database—with row-level security, secret-handling best practices, and a quick table setup walkthrough.
+Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough.
 {{</lead>}}
 
 <!-- Series blurb -->
@@ -14,6 +19,7 @@ Need to store user credits securely? In this post, we’ll show you how to hook 
 This post is [part of a series]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai">}}) to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.
 {{</alert>}}
 
+<!--
 ## Why Do We Need A Database?
 
 Databases are the backbone of any dynamic application. In our case, we need to store and manage the credit balances of our users efficiently. Whether you’re updating credits after a transaction or querying the current balance, a database provides the reliability and performance necessary to keep everything in sync.
@@ -104,10 +110,10 @@ EMAIL_ADDRESS = "xxxx"
 PASSWORD = "xxxx"
 ```
 
-{{<alert>}} Make sure you never publish your secrets, do not commit them to GitHub! Always include `secrets.toml` in your `.gitignore` file. Read more about secrets management [here](https://docs.streamlit.io/develop/concepts/connections/secrets-management). {{</alert>}}
+{{<alert>}} Make sure you never publish your secrets, do not commit them to GitHub! Always include `secrets.toml` in your `.gitignore` file. Read more about secrets management [here](https://docs.streamlit.io/develop/concepts/connections/secrets-management). {{</alert>}} -->
 
 <!-- markdownlint-disable -->
-{{<highlight python "linenos=table,hl_lines=2-3 5">}}
+<!-- {{<highlight python "linenos=table,hl_lines=2-3 5">}}
 import streamlit as st
 from st_supabase_connection import SupabaseConnection
 
@@ -119,13 +125,13 @@ conn.auth.sign_in_with_password(
         "password": st.secrets["connections"]["supabase"]["PASSWORD"],
     }
 )
-{{</highlight>}}
+{{</highlight>}} -->
 <!-- markdownlint-enable -->
 
-Explain caching and ttl.
+<!-- Explain caching and ttl.
 
 ## Create users as they connect
 
 ## Testing Your Database Setup
 
-## Next Steps
+## Next Steps -->

@@ -1,8 +1,14 @@
 ---
 title: "Deploying Your App"
+date: 2025-03-07
 summary: "You’ve built something awesome — now it’s time to share it with the world! Learn the ins and outs of deploying your Streamlit app on Streamlit Cloud, it's (almost) as simple as a single click."
 weight: 60
+draft: true
 ---
+
+{{<badge>}}
+Draft
+{{</badge>}}
 
 {{<lead>}}
 You’ve built something awesome — now it’s time to share it with the world! Learn the ins and outs of deploying your Streamlit app on Streamlit Cloud, it's (almost) as simple as a single click.
@@ -13,6 +19,8 @@ You’ve built something awesome — now it’s time to share it with the world!
 This post is [part of a series]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai">}}) to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.
 {{</alert>}}
 
+<!-- Series blurb -->
+<!-- 
 ## Why Do We Need To Deploy Our App?
 
 ## Which Deployment Option Should I Choose?
@@ -60,4 +68,4 @@ serve new .env file to supabase
 
 ## Testing Your Deployment
 
-## Next Steps
+## Next Steps -->

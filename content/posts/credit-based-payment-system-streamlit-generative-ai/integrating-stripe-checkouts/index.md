@@ -1,15 +1,25 @@
 ---
 title: "Integrating Stripe Checkouts"
 date: 2025-03-06
-summary: ""
+summary: "Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks."
 weight: 30
+draft: true
 ---
+
+{{<badge>}}
+Draft
+{{</badge>}}
+
+{{<lead>}}
+Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks.
+{{</lead>}}
 
 <!-- Series blurb -->
 {{<alert "circle-info">}}
 This post is [part of a series]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai">}}) to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.
 {{</alert>}}
 
+<!--
 ## Why Do We Need Stripe?
 
 ### What About LemonSqueezy, Polar...?
@@ -173,4 +183,4 @@ PASSWORD="xxxx"
 
 ## Testing Your Payment Workflow
 
-## Next Steps
+## Next Steps -->
