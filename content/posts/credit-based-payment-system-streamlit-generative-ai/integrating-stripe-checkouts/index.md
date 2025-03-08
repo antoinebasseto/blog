@@ -1,6 +1,6 @@
 ---
 title: "Integrating Stripe Checkouts"
-date: 2025-03-06
+date: 
 summary: "Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks."
 weight: 30
 draft: true
