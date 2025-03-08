@@ -72,7 +72,7 @@
     name="description"
     content="
       
-        User authentication is the first step to building any app that needs to know who&rsquo;s who — like one with user credits 👀 — and with Streamlit&rsquo;s new native authentication features, it&rsquo;s easier than ever!
+        User authentication is the first step in building any app that needs to track who&rsquo;s who — like one with user credits 👀 — and with Streamlit&rsquo;s new native authentication features, it&rsquo;s easier than ever!
       
     "
   />
@@ -97,7 +97,7 @@
   <meta property="og:url" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/setting-up-user-login/">
   <meta property="og:site_name" content="Antoine Basseto&#39;s Blog">
   <meta property="og:title" content="Setting Up User Login">
-  <meta property="og:description" content="User authentication is the first step to building any app that needs to know who’s who — like one with user credits 👀 — and with Streamlit’s new native authentication features, it’s easier than ever!">
+  <meta property="og:description" content="User authentication is the first step in building any app that needs to track who’s who — like one with user credits 👀 — and with Streamlit’s new native authentication features, it’s easier than ever!">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -109,7 +109,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/setting-up-user-login/feature.png">
   <meta name="twitter:title" content="Setting Up User Login">
-  <meta name="twitter:description" content="User authentication is the first step to building any app that needs to know who’s who — like one with user credits 👀 — and with Streamlit’s new native authentication features, it’s easier than ever!">
+  <meta name="twitter:description" content="User authentication is the first step in building any app that needs to track who’s who — like one with user credits 👀 — and with Streamlit’s new native authentication features, it’s easier than ever!">
 
   
   <script type="application/ld+json">
@@ -120,7 +120,7 @@
     "name": "Setting Up User Login",
     "headline": "Setting Up User Login",
     
-    "abstract": "User authentication is the first step to building any app that needs to know who\u0026rsquo;s who — like one with user credits 👀 — and with Streamlit\u0026rsquo;s new native authentication features, it\u0026rsquo;s easier than ever!",
+    "abstract": "User authentication is the first step in building any app that needs to track who\u0026rsquo;s who — like one with user credits 👀 — and with Streamlit\u0026rsquo;s new native authentication features, it\u0026rsquo;s easier than ever!",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/blog\/posts\/credit-based-payment-system-streamlit-generative-ai\/setting-up-user-login\/",
     "author" : {
@@ -136,7 +136,7 @@
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "1017"
+    "wordCount": "1012"
   }
   </script>
     
@@ -509,7 +509,7 @@
       
       <div class="min-h-0 min-w-0 max-w-prose grow">
         <div class="lead !mb-9 text-xl">
-  User authentication is the first step to building any app that needs to know who&rsquo;s who — like one with user credits 👀 — and with Streamlit&rsquo;s new native authentication features, it&rsquo;s easier than ever!
+  User authentication is the first step in building any app that needs to track who&rsquo;s who — like one with user credits 👀 — and with Streamlit&rsquo;s new native authentication features, it&rsquo;s easier than ever!
 </div>
 
 <!-- Series blurb -->
@@ -525,11 +525,11 @@
 <h2 id="prerequisites" class="relative group">Prerequisites <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#prerequisites" aria-label="Anchor">#</a></span></h2><p>Before we jump in, make sure you have the following ready:</p>
 <ul>
 <li><strong>Streamlit version &gt;= 1.42.0:</strong> The native authentication features are available from this version onward. Check your version with <code>streamlit --version</code>.</li>
-<li><strong>Authlib &gt;= 1.3.2:</strong> This library is required to use Streamlit&rsquo;s native authentication feautures. Install it with <code>pip install Authlib</code>.</li>
+<li><strong>Authlib &gt;= 1.3.2:</strong> This library is required to use Streamlit&rsquo;s native authentication features. Install it with <code>pip install Authlib</code>.</li>
 </ul>
 <p>Once you’ve got these sorted, you’re ready to set up authentication!</p>
 <h2 id="setting-up-native-authentication-in-streamlit" class="relative group">Setting Up Native Authentication in Streamlit <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#setting-up-native-authentication-in-streamlit" aria-label="Anchor">#</a></span></h2><p>Streamlit now offers a straightforward way to handle user logins. You can read more from the official docs <a href="https://docs.streamlit.io/develop/concepts/connections/authentication" target="_blank" rel="noreferrer">here</a>, but we&rsquo;ll break down the process step by step.</p>
-<h3 id="configure-your-identity-provider" class="relative group">Configure Your Identity Provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configure-your-identity-provider" aria-label="Anchor">#</a></span></h3><p>Identity providers handle the heavy lifting of user authentication and security — so you don&rsquo;t have to manage passwords or other sensitive details yourself. Streamlit supports any provider using OpenID Connect (OIDC) (I am not sure what it is either), but in this tutorial we will use Google Identity. Why? Well, it&rsquo;s straightforward to set up and widely used. But yes, it does mean people will need a Google account to sign up to our app, if that is a problem for you, you can look into <a href="https://docs.streamlit.io/develop/concepts/connections/authentication#openid-connect" target="_blank" rel="noreferrer">other providers</a>, such as <a href="https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps" target="_blank" rel="noreferrer">Auth0</a>.</p>
+<h3 id="configure-your-identity-provider" class="relative group">Configure Your Identity Provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configure-your-identity-provider" aria-label="Anchor">#</a></span></h3><p>Identity providers handle the heavy lifting of user authentication and security — so you don&rsquo;t have to manage passwords or other sensitive details yourself. Streamlit supports any provider using OpenID Connect (OIDC), but in this tutorial we will use Google Identity. Why? Well, it&rsquo;s straightforward to set up and widely used. However, this does mean users will need a Google account to sign up for our app. If that’s a problem, you can explore <a href="https://docs.streamlit.io/develop/concepts/connections/authentication#openid-connect" target="_blank" rel="noreferrer">other providers</a>, such as <a href="https://auth0.com/docs/get-started/auth0-overview/create-applications/regular-web-apps" target="_blank" rel="noreferrer">Auth0</a>.</p>
 <p>Let&rsquo;s walk through the process of setting up Google as your identity provider:</p>
 <ol>
 <li>
@@ -562,13 +562,13 @@
 <li><strong>Developer contact information:</strong> Your email address</li>
 </ul>
 </li>
-<li>Under <strong>&ldquo;Google Auth Platform / Audience&rdquo;</strong>, go to &ldquo;Test Users&rdquo; and add the google account you will use for testing.</li>
+<li>Under <strong>&ldquo;Google Auth Platform / Audience&rdquo;</strong>, go to &ldquo;Test Users&rdquo; and add the Google account you will use for testing.</li>
 <li>Under <strong>&ldquo;Google Auth Platform / Data access&rdquo;</strong>, click &ldquo;Add or remove scopes&rdquo; and select the scope <code>.../auth/userinfo.email</code>, which means we will have access to our users&rsquo; email address, then click &ldquo;Update&rdquo;.</li>
 <li>Now return to <strong>&ldquo;Credentials&rdquo;</strong> and click &ldquo;Create Credentials &gt; OAuth client ID&rdquo; again</li>
 <li>For &ldquo;Application type,&rdquo; select <strong>&ldquo;Web application&rdquo;</strong></li>
 <li>Fill in the required information:
 <ul>
-<li><strong>Name of your oauth client</strong>, I named mine <code>web_client_projectname</code>.</li>
+<li><strong>Name of your OAuth client</strong>, I named mine <code>web_client_projectname</code>.</li>
 <li>Under <strong>&ldquo;Authorized JavaScript origins&rdquo;</strong>, add <code>http://localhost:8501</code></li>
 <li>Under <strong>&ldquo;Authorized redirect URIs&rdquo;</strong>, add <code>http://localhost:8501/oauth2callback</code>
 <div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
@@ -576,7 +576,7 @@
     <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
 </span>
   </span>
-  <span class="dark:text-neutral-300">Once we <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/" target="_blank" rel="noreferrer">deploy our app</a>, we will have to add our live domain the authorized origins and redirect URIs.</span>
+  <span class="dark:text-neutral-300">Once we <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/" target="_blank" rel="noreferrer">deploy our app</a>, we will have to add our live domain to the authorized origins and redirect URIs.</span>
 </div>
 </li>
 </ul>
@@ -587,13 +587,13 @@
 </li>
 </ol>
 <p>The consent screen is initially in &ldquo;Testing&rdquo; mode with restrictions on the number of users. For a production app, you would need to go through Google&rsquo;s verification process to publish it, but testing mode is sufficient for development or internal apps. We&rsquo;ll worry about that when we try to <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/">deploy our app</a>.</p>
-<h3 id="configure-your-secrets" class="relative group">Configure Your Secrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configure-your-secrets" aria-label="Anchor">#</a></span></h3><p>Now that we&rsquo;re all set up on Google&rsquo;s side, we need to let our Streamlit app know! To use native authentication, Streamlit expects some information in the <code>secrets.toml</code> file. Remember those client secret and client id? This is where we use them.</p>
+<h3 id="configure-your-secrets" class="relative group">Configure Your Secrets <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configure-your-secrets" aria-label="Anchor">#</a></span></h3><p>Now that we&rsquo;re all set up on Google&rsquo;s side, we need to let our Streamlit app know! To use native authentication, Streamlit expects some information in the <code>.streamlit/secrets.toml</code> file. Remember those client secret and client id? This is where we use them.</p>
 <div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
   <span class="pe-3 text-primary-400">
     <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
 </span>
   </span>
-  <span class="dark:text-neutral-300">Make sure you never publish your secrets (e.g. do not commit them to GitHub). Always include <code>secrets.toml</code> in your <code>.gitignore</code> file. Read more about secrets management <a href="https://docs.streamlit.io/develop/concepts/connections/secrets-management" target="_blank" rel="noreferrer">here</a>.</span>
+  <span class="dark:text-neutral-300">Make sure never to publish your secrets (e.g., avoid committing them to GitHub). Always include <code>secrets.toml</code> in your <code>.gitignore</code> file. Read more about secrets management <a href="https://docs.streamlit.io/develop/concepts/connections/secrets-management" target="_blank" rel="noreferrer">here</a>.</span>
 </div>
 
 <p>Your <code>secrets.toml</code> file should look like this:</p>
@@ -612,13 +612,13 @@
 </span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">sidebar</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="ow">not</span> <span class="n">st</span><span class="o">.</span><span class="n">experimental_user</span><span class="o">.</span><span class="n">is_logged_in</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">      <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&#34;Log in&#34;</span><span class="p">,</span> <span class="n">on_click</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">login</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;google&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">      <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="n">st</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1"># Stop further execution if user is not logged in.</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&#34;Log out&#34;</span><span class="p">,</span> <span class="n">on_click</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">logout</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;google&#34;</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Paid features come here (after st.stop())</span>
 </span></span></code></pre></div><h2 id="testing-your-authentication-setup" class="relative group">Testing Your Authentication Setup <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#testing-your-authentication-setup" aria-label="Anchor">#</a></span></h2><p>After implementing the login functionality, it’s time to test it out. Run your app with <code>streamlit run your-app.py</code> and make sure you can log in, log out and <code>st.experimental_user</code> contains the expected information — you can try <code>st.write(st.experimental_user)</code>. Remember to log in with the Google account you set as a test account during set up.</p>
-<h2 id="next-steps" class="relative group">Next Steps <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#next-steps" aria-label="Anchor">#</a></span></h2><p>With user authentication in place, we can put a <del>name</del> <em>email address</em> to <del>people&rsquo;s faces</del> <em>credit balance system</em>. Next, we’ll look at how to <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/">connect to a database</a>.</p>
+<h2 id="next-steps" class="relative group">Next Steps <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#next-steps" aria-label="Anchor">#</a></span></h2><p>With user authentication in place, we can associate an email address with each user&rsquo;s credit balance. Next, we’ll look at how to <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/">connect to a database</a>.</p>
 <div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
   <span class="pe-3 text-primary-400">
     <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7L272 415.1h-160L112.1 454.3zM191.4 .0132C89.44 .3257 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8c16.53 18.84 42.34 58.23 52.22 91.45c.0313 .25 .0938 .5166 .125 .7823h160.2c.0313-.2656 .0938-.5166 .125-.7823c9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1C368 78.61 288.9-.2837 191.4 .0132zM192 96.01c-44.13 0-80 35.89-80 79.1C112 184.8 104.8 192 96 192S80 184.8 80 176c0-61.76 50.25-111.1 112-111.1c8.844 0 16 7.159 16 16S200.8 96.01 192 96.01z"/></svg>

@@ -76,7 +76,7 @@ The consent screen is initially in "Testing" mode with restrictions on the numbe
 
 ### Configure Your Secrets
 
-Now that we're all set up on Google's side, we need to let our Streamlit app know! To use native authentication, Streamlit expects some information in the `secrets.toml` file. Remember those client secret and client id? This is where we use them.
+Now that we're all set up on Google's side, we need to let our Streamlit app know! To use native authentication, Streamlit expects some information in the `.streamlit/secrets.toml` file. Remember those client secret and client id? This is where we use them.
 
 {{<alert>}} Make sure never to publish your secrets (e.g., avoid committing them to GitHub). Always include `secrets.toml` in your `.gitignore` file. Read more about secrets management [here](https://docs.streamlit.io/develop/concepts/connections/secrets-management). {{</alert>}}
 
