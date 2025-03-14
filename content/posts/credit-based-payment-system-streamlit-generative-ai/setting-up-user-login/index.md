@@ -3,6 +3,7 @@ title: "Setting Up User Login"
 date: 2025-03-07
 summary: "User authentication is the first step in building any app that needs to track who's who — like one with user credits 👀 — and with Streamlit's new native authentication features, it's easier than ever!"
 weight: 10
+showComments: true
 ---
 
 {{<lead>}}

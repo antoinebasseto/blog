@@ -4,6 +4,7 @@ date:
 summary: "You’ve built something awesome — now it’s time to share it with the world! Learn the ins and outs of deploying your Streamlit app on Streamlit Cloud, it's (almost) as simple as a single click."
 weight: 60
 draft: true
+showComments: true
 ---
 
 {{<badge>}}

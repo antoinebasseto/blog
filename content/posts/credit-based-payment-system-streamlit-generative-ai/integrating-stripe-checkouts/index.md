@@ -3,6 +3,7 @@ title: "Integrating Stripe Checkouts"
 date: 2025-03-14
 summary: "Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks."
 weight: 30
+showComments: true
 ---
 
 {{<lead>}}
@@ -152,7 +153,7 @@ Okay, but what’s a serverless function exactly? Well, it's a piece of code you
 Serverless functions are only serverless in the sense that **you don't have to deal with the server**, but it does exist!
 {{</alert>}}
 
-#### Choosing a provider
+#### Choosing a Provider
 
 Now, which provider to choose? There are a lot of options: **AWS Lambda**, **Google Cloud Functions**, and others. AWS Lambda is popular, but it can be a bit much for simple use cases.
 

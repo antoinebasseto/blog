@@ -4,6 +4,7 @@ date:
 summary: "Ready for your app to do something? In this post learn how to query an LLM API — including measuring costs and removing credits from users."
 weight: 50
 draft: true
+showComments: true
 ---
 
 {{<badge>}}

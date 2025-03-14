@@ -3,6 +3,7 @@ title: "Connecting To A Database"
 date: 2025-03-08
 summary: "Need to store user credits securely? In this post, we’ll show you how to hook your Streamlit app up to a database — with row-level security, secret-handling best practices, and a quick table setup walkthrough."
 weight: 20
+showComments: true
 ---
 
 {{<lead>}}

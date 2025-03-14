@@ -506,7 +506,7 @@
         <li><a href="#what-are-stripe-webhooks-why-do-they-exist">What Are Stripe Webhooks, Why Do They Exist?</a></li>
         <li><a href="#going-serverless">Going Serverless</a>
           <ul>
-            <li><a href="#choosing-a-provider">Choosing a provider</a></li>
+            <li><a href="#choosing-a-provider">Choosing a Provider</a></li>
           </ul>
         </li>
         <li><a href="#writing-the-webhook-handler">Writing The Webhook Handler</a></li>
@@ -639,7 +639,7 @@
   <span class="dark:text-neutral-300">Serverless functions are only serverless in the sense that <strong>you don&rsquo;t have to deal with the server</strong>, but it does exist!</span>
 </div>
 
-<h4 id="choosing-a-provider" class="relative group">Choosing a provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choosing-a-provider" aria-label="Anchor">#</a></span></h4><p>Now, which provider to choose? There are a lot of options: <strong>AWS Lambda</strong>, <strong>Google Cloud Functions</strong>, and others. AWS Lambda is popular, but it can be a bit much for simple use cases.</p>
+<h4 id="choosing-a-provider" class="relative group">Choosing a Provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choosing-a-provider" aria-label="Anchor">#</a></span></h4><p>Now, which provider to choose? There are a lot of options: <strong>AWS Lambda</strong>, <strong>Google Cloud Functions</strong>, and others. AWS Lambda is popular, but it can be a bit much for simple use cases.</p>
 <p>But what if I told you that you already have a provider? <strong>Supabase</strong>! Supabase offers <em>edge functions</em>. Don&rsquo;t worry! It&rsquo;s just a fancy name for a special kind of serverless functions, that live on servers all over the world to be closer to the users (on the <em>edge</em> of the network) and enable faster processing times. By using Supabase, we can easily integrate our code with our existing database. No need to jump between different services — it’s all in one place.</p>
 <h3 id="writing-the-webhook-handler" class="relative group">Writing The Webhook Handler <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#writing-the-webhook-handler" aria-label="Anchor">#</a></span></h3><p>So, we can run code on the cloud, but now we need the code! This part is an adapted version of <a href="https://supabase.com/docs/guides/functions/examples/stripe-webhooks" target="_blank" rel="noreferrer">Supabase&rsquo;s official tutorial</a>, go check it out if you want. First, let&rsquo;s set up our supabase edge function:</p>
 <ul>
@@ -1373,8 +1373,8 @@
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.toml" data-lang=".toml"><span class="line"><span class="cl"><span class="nx">STRIPE_API_KEY</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">STRIPE_WEBHOOK_SIGNING_SECRET</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="err">//</span> <span class="nx">The</span> <span class="nx">email</span> <span class="nx">and</span> <span class="nx">password</span> <span class="nx">combo</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">Supabase</span> <span class="nx">user</span> <span class="nx">you</span> <span class="nx">set</span> <span class="nx">up</span> <span class="nx">previously</span><span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="err">//</span> <span class="nx">If</span> <span class="nx">you</span> <span class="nx">followed</span> <span class="nx">the</span> <span class="nx">previous</span> <span class="nx">guide</span><span class="p">,</span> <span class="nx">they</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">present</span> <span class="nx">in</span> <span class="nx">your</span> <span class="p">.</span><span class="nx">streamlit</span><span class="err">/</span><span class="nx">secrets</span><span class="p">.</span><span class="nx">toml</span> <span class="nx">file</span>
+</span></span><span class="line"><span class="cl"><span class="c"># The email and password combo of the Supabase user you set up previously.</span>
+</span></span><span class="line"><span class="cl"><span class="c"># If you followed the previous guide, they should be present in your .streamlit/secrets.toml file</span>
 </span></span><span class="line"><span class="cl"><span class="nx">EMAIL</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nx">PASSWORD</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
 </span></span></code></pre></div><div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
@@ -1647,6 +1647,34 @@
   
 
 
+      
+        
+          <div class="pt-3">
+            <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+            <div class="pt-3">
+              <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "antoinebasseto" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+          </div>
+        
       
     </footer>
   </article>

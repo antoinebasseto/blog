@@ -1,3 +1,6 @@
 [services]
   [services.googleAnalytics]
     id = 'G-M1FW3KMDLN'
+
+  [services.disqus]
+    shortname = 'antoinebasseto'
