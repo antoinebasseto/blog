@@ -567,8 +567,8 @@ If everything is processed without errors, we return a JSON response with `{ ok:
     ```.toml
     STRIPE_API_KEY="xxxx"
     STRIPE_WEBHOOK_SIGNING_SECRET="xxxx"
-    // The email and password combo of the Supabase user you set up previously.
-    // If you followed the previous guide, they should be present in your .streamlit/secrets.toml file
+    # The email and password combo of the Supabase user you set up previously.
+    # If you followed the previous guide, they should be present in your .streamlit/secrets.toml file
     EMAIL="xxxx"
     PASSWORD="xxxx"
     ```
