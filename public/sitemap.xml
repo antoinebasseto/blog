@@ -37,14 +37,14 @@
     
       <url>
             <loc>http://localhost:1313/blog/</loc>
-            <lastmod>2025-03-08T00:00:00+00:00</lastmod>
+            <lastmod>2025-03-13T00:00:00+00:00</lastmod>
           </url>
     
   
     
       <url>
             <loc>http://localhost:1313/blog/posts/</loc>
-            <lastmod>2025-03-08T00:00:00+00:00</lastmod>
+            <lastmod>2025-03-13T00:00:00+00:00</lastmod>
           </url>
     
   
@@ -52,13 +52,6 @@
       <url>
             <loc>http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/</loc>
             <lastmod>2025-02-28T00:00:00+00:00</lastmod>
-          </url>
-    
-  
-    
-      <url>
-            <loc>http://localhost:1313/blog/posts/introducing-simplyplot/</loc>
-            <lastmod>2025-02-08T00:00:00+00:00</lastmod>
           </url>
     
   

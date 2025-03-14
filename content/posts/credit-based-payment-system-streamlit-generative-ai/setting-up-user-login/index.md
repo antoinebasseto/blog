@@ -62,15 +62,15 @@ Let's walk through the process of setting up Google as your identity provider:
         - **Developer contact information:** Your email address
       - Under **"Google Auth Platform / Audience"**, go to "Test Users" and add the Google account you will use for testing.
       - Under **"Google Auth Platform / Data access"**, click "Add or remove scopes" and select the scope `.../auth/userinfo.email`, which means we will have access to our users' email address, then click "Update".
-      - Now return to **"Credentials"** and click "Create Credentials > OAuth client ID" again
-      - For "Application type," select **"Web application"**
-      - Fill in the required information:
-        - **Name of your OAuth client**, I named mine `web_client_projectname`.
-        - Under **"Authorized JavaScript origins"**, add `http://localhost:8501`
-        - Under **"Authorized redirect URIs"**, add `http://localhost:8501/oauth2callback`
-      {{<alert>}}Once we [deploy our app]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app">}}), we will have to add our live domain to the authorized origins and redirect URIs.{{</alert>}}
-      - Click **"Create Client"**
-      - Copy paste your **client secret** and **client ID**, we will need them soon! You can find them again under "Google Auth Platform / Clients" and then clicking on the client you just created.
+      - Now in the left sidebar, return to **"APIs & Services > Credentials"** and click "Create Credentials > OAuth client ID" again
+        - For "Application type," select **"Web application"**
+        - Fill in the required information:
+          - **Name of your OAuth client**, I named mine `web_client_projectname`.
+          - Under **"Authorized JavaScript origins"**, add `http://localhost:8501`
+          - Under **"Authorized redirect URIs"**, add `http://localhost:8501/oauth2callback`
+        {{<alert>}}Once we [deploy our app]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app">}}), we will have to add our live domain to the authorized origins and redirect URIs.{{</alert>}}
+        - Click **"Create Client"**
+        - Copy paste your **client secret** and **client ID**, we will need them soon! You can find them again under "Google Auth Platform / Clients" and then clicking on the client you just created.
 
 The consent screen is initially in "Testing" mode with restrictions on the number of users. For a production app, you would need to go through Google's verification process to publish it, but testing mode is sufficient for development or internal apps. We'll worry about that when we try to [deploy our app]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app">}}).
 

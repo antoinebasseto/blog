@@ -60,7 +60,7 @@ Before we begin, make sure you have:
 - **Create Your Table:**
   - In the left sidebar, click **Table Editor**.
   - Click **Create a new table** and fill in the following:
-    - **Name:** Use users (or any name you prefer—just update your code accordingly).
+    - **Name:** Input `users` (or any name you prefer—just update your code accordingly).
     - **Description:** Optional.
     - **Enable Row Level Security (RLS):** Keep this checked.
     - **Edit Columns** to include:
@@ -82,6 +82,7 @@ Before we begin, make sure you have:
   - Next, select again the template **Enable insert for authenticated users only**:
     - Rename it to **Enable update access for authenticated users only**.
     - Set the operation type to **Update**.
+    - Under `using` type `true`.
     - Click **Save policy**.
   - Still under **Authentication**, click **Users** in the left sidebar.
     - Click **Add user > Create a new user**, enter an email address and a password of your choice, ensure auto confirm user is checked, then click create user.

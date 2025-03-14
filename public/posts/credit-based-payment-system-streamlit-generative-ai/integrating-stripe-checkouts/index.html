@@ -101,6 +101,8 @@
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-14T00:00:00+00:00">
     <meta property="og:image" content="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/integrating-stripe-checkouts/feature.png">
 
   
@@ -125,16 +127,16 @@
       "@type": "Person",
       "name": "Antoine Basseto"
     },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-03-14T00:00:00\u002b00:00",
+    "datePublished": "2025-03-14T00:00:00\u002b00:00",
     
-    
-    
-    
-    
+    "dateModified": "2025-03-14T00:00:00\u002b00:00",
     
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "60"
+    "wordCount": "3785"
   }
   </script>
     
@@ -381,7 +383,7 @@
   <div class="flex flex-row flex-wrap items-center">
     
     
-      <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">1 January 0001</time><span class="px-2 text-primary-500">&middot;</span>
+      <time datetime="2025-03-14 00:00:00 &#43;0000 UTC">14 March 2025</time><span class="px-2 text-primary-500">&middot;</span>
 
 
   
@@ -401,15 +403,6 @@
     
 
     
-    
-      <span class="ps-2"><span class="flex">
-  <span
-    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
-  >
-    Draft
-  </span>
-</span>
-</span>
     
   </div>
 
@@ -484,19 +477,54 @@
     </header>
     <section class="prose mt-0 flex max-w-full flex-col dark:prose-invert lg:flex-row">
       
-      <div class="min-h-0 min-w-0 max-w-prose grow">
-        <span class="flex">
-  <span
-    class="ms-1 rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+        <div class="order-first px-0 lg:order-last lg:max-w-xs lg:ps-8">
+          <div class="toc pe-5 lg:sticky lg:top-10 print:hidden">
+            <details open class="-ms-5 mt-0 overflow-hidden rounded-lg ps-5">
+  <summary
+    class="block cursor-pointer bg-neutral-100 py-1 ps-5 text-lg font-semibold text-neutral-800 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden"
   >
-    
-Draft
+    Table of Contents
+  </summary>
+  <div class="border-s border-dotted border-neutral-300 py-2 ps-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#why-do-we-need-stripe">Why Do We Need Stripe?</a>
+      <ul>
+        <li><a href="#what-about-lemonsqueezy-polar">What About LemonSqueezy, Polar&hellip;?</a></li>
+      </ul>
+    </li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#integrate-stripe-checkouts">Integrate Stripe Checkouts</a>
+      <ul>
+        <li><a href="#configuring-your-stripe-account">Configuring Your Stripe Account</a></li>
+        <li><a href="#calling-the-api">Calling The API</a></li>
+      </ul>
+    </li>
+    <li><a href="#testing-your-stripe-setup">Testing Your Stripe Setup</a></li>
+    <li><a href="#the-hard-part-stripe-webhooks">The Hard Part, Stripe Webhooks</a>
+      <ul>
+        <li><a href="#what-are-stripe-webhooks-why-do-they-exist">What Are Stripe Webhooks, Why Do They Exist?</a></li>
+        <li><a href="#going-serverless">Going Serverless</a>
+          <ul>
+            <li><a href="#choosing-a-provider">Choosing a provider</a></li>
+          </ul>
+        </li>
+        <li><a href="#writing-the-webhook-handler">Writing The Webhook Handler</a></li>
+        <li><a href="#deploying-the-webhook-handler">Deploying The Webhook Handler</a></li>
+      </ul>
+    </li>
+    <li><a href="#testing-your-payment-workflow">Testing Your Payment Workflow</a></li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
 
-  </span>
-</span>
-
-
-<div class="lead !mb-9 text-xl">
+          </div>
+        </div>
+      
+      <div class="min-h-0 min-w-0 max-w-prose grow">
+        <div class="lead !mb-9 text-xl">
   Ready to start charging for your app? In this post we will learn how to set up a pay-per-use system — from creating Stripe Checkout sessions to listening to webhooks.
 </div>
 
@@ -509,171 +537,893 @@ Draft
   <span class="dark:text-neutral-300">This post is <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/" target="_blank" rel="noreferrer">part of a series</a> to learn how to build and deploy a Streamlit app with a credit system, covering authentication, payments with Stripe, databases, and more.</span>
 </div>
 
-<!--
-## Why Do We Need Stripe?
+<h2 id="why-do-we-need-stripe" class="relative group">Why Do We Need Stripe? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#why-do-we-need-stripe" aria-label="Anchor">#</a></span></h2><p>If you want to charge users for your app, you need a payment processor — a service that handles credit card transactions, securely moves money, and ensures compliance with financial regulations. Stripe has become the default choice for many developers because it’s easy to integrate and widely supported. That’s why we’re using it here.</p>
+<h3 id="what-about-lemonsqueezy-polar" class="relative group">What About LemonSqueezy, Polar&hellip;? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-about-lemonsqueezy-polar" aria-label="Anchor">#</a></span></h3><p>Some other payment processors, such as <a href="https://www.lemonsqueezy.com" target="_blank" rel="noreferrer">LemonSqueezy</a> and <a href="https://polar.sh" target="_blank" rel="noreferrer">Polar</a>, work differently — they act as Merchants of Record (MoR). This means they don’t just process payments; they also handle taxes, chargebacks, and compliance for you (in exchange for a bigger cut of your profits).</p>
+<p>With Stripe, you&rsquo;re responsible for these things yourself. If you want full control over your payments and customer relationships, Stripe is a good option. However, if dealing with VAT, sales tax, and regulations seems overwhelming, an MoR might be a better fit.</p>
+<h2 id="requirements" class="relative group">Requirements <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#requirements" aria-label="Anchor">#</a></span></h2><p>Before we get started, make sure you have:</p>
+<ul>
+<li><strong>User Authentication and a Database:</strong> If you haven&rsquo;t done this yet, follow the first part of this blog for <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/setting-up-user-login/">authentication</a> and the second for <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/connecting-to-a-database/">databases</a>.</li>
+<li><strong>Stripe’s Python SDK:</strong> Install it with <code>pip install stripe</code>.</li>
+</ul>
+<h2 id="integrate-stripe-checkouts" class="relative group">Integrate Stripe Checkouts <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#integrate-stripe-checkouts" aria-label="Anchor">#</a></span></h2><p>Stripe operates in two modes:</p>
+<ul>
+<li><strong>Test Mode / Sandboxes:</strong> Simulate transactions without real money, perfect for development and testing. Stripe recently transitioned from traditional test environments to &ldquo;sandboxes,&rdquo; allowing you to start testing without entering business details until you&rsquo;re ready to go live.</li>
+<li><strong>Live Mode:</strong> Handle real transactions with actual funds.</li>
+</ul>
+<p>Each mode comes with its own API keys, keeping testing data separate from live transactions.</p>
+<h3 id="configuring-your-stripe-account" class="relative group">Configuring Your Stripe Account <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#configuring-your-stripe-account" aria-label="Anchor">#</a></span></h3><p>In the <strong>&ldquo;Settings&rdquo;</strong> menu, go to <strong>&ldquo;Business &gt; Branding &gt; Checkout &amp; Payment Links&rdquo;</strong>. On the left, you can add your icon and logo, and adjust your brand colors.</p>
+<h3 id="calling-the-api" class="relative group">Calling The API <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#calling-the-api" aria-label="Anchor">#</a></span></h3><p>On the left sidebar, select &ldquo;<strong>Home</strong>&rdquo;, which will display your API Keys on the right hand side (or search for &ldquo;API keys&rdquo; in the search bar). Click to reveal your secret key and copy it to your <code>.streamlit/secrets.toml</code> file.</p>
+<div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
+  <span class="pe-3 text-primary-400">
+    <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
+</span>
+  </span>
+  <span class="dark:text-neutral-300">Make sure you never publish your secrets, do not commit them to GitHub! Always include <code>secrets.toml</code> in your <code>.gitignore</code> file. Read more about secrets management <a href="https://docs.streamlit.io/develop/concepts/connections/secrets-management" target="_blank" rel="noreferrer">here</a>.</span>
+</div>
 
-### What About LemonSqueezy, Polar...?
+<p>Add the following section to your <code>secrets.toml</code> file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">stripe</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">API_KEY</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SUCCESS_URL</span> <span class="p">=</span> <span class="s2">&#34;http://localhost:8501&#34;</span>
+</span></span></code></pre></div><h2 id="testing-your-stripe-setup" class="relative group">Testing Your Stripe Setup <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#testing-your-stripe-setup" aria-label="Anchor">#</a></span></h2><p>To test your Stripe setup, you can use the following Python code to create a checkout session that allows users to purchase credits. This script integrates with Stripe&rsquo;s API to create a session where users can complete their payment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_checkout_session</span><span class="p">(</span><span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">user_email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Create a Stripe checkout session for purchasing credits.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        amount: Dollar amount to charge (e.g., 5.00 means $5)
+</span></span></span><span class="line"><span class="cl"><span class="s2">        user_email: Email of the current user
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        str: URL for the checkout session
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Set the Stripe API key using the secrets stored in Streamlit</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stripe</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">secrets</span><span class="p">[</span><span class="s2">&#34;stripe&#34;</span><span class="p">][</span><span class="s2">&#34;API_KEY&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create a checkout session with the specified parameters</span>
+</span></span><span class="line"><span class="cl">    <span class="n">checkout_session</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">checkout</span><span class="o">.</span><span class="n">Session</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">customer_email</span><span class="o">=</span><span class="n">user_email</span><span class="p">,</span> <span class="c1"># Associate the session with the user&#39;s email</span>
+</span></span><span class="line"><span class="cl">        <span class="n">line_items</span><span class="o">=</span><span class="p">[</span> <span class="c1"># Define the items being purchased</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;price_data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;currency&#34;</span><span class="p">:</span> <span class="s2">&#34;usd&#34;</span><span class="p">,</span> <span class="c1"># Currency for the payment</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;product_data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Credits Purchase&#34;</span><span class="p">,</span> <span class="c1"># Name of the item being purchased</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                    <span class="s2">&#34;unit_amount&#34;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">),</span>  <span class="c1"># Convert the amount to cents (Stripe expects cents)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;quantity&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mode</span><span class="o">=</span><span class="s2">&#34;payment&#34;</span><span class="p">,</span> <span class="c1"># This sets the checkout mode to a one-time payment</span>
+</span></span><span class="line"><span class="cl">        <span class="n">success_url</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">secrets</span><span class="p">[</span><span class="s2">&#34;stripe&#34;</span><span class="p">][</span><span class="s2">&#34;SUCCESS_URL&#34;</span><span class="p">],</span> <span class="c1"># URL to redirect to after a successful payment</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Return the URL where the user can complete their payment</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">checkout_session</span><span class="o">.</span><span class="n">url</span>
+</span></span></code></pre></div><p>This function takes an amount (in dollars) and the user&rsquo;s email to generate a Stripe checkout session. After creating the session, it returns a URL where the user can finalize the payment.</p>
+<p>You can use this function in your app like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Allow users to choose the amount of credits they want to purchase</span>
+</span></span><span class="line"><span class="cl"><span class="n">amount</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Amount to add&#34;</span><span class="p">,</span> <span class="c1"># Label for the input field</span>
+</span></span><span class="line"><span class="cl">    <span class="n">min_value</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="c1"># Minimum purchase amount</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_value</span><span class="o">=</span><span class="mf">10.00</span><span class="p">,</span> <span class="c1"># Maximum purchase amount</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span><span class="o">=</span><span class="mf">3.00</span><span class="p">,</span> <span class="c1"># Default value</span>
+</span></span><span class="line"><span class="cl">    <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="c1"># Step value for each increment (using the +/- buttons)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">format</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%.2f</span><span class="s2">&#34;</span><span class="p">,</span> <span class="c1"># Format the amount as currency</span>
+</span></span><span class="line"><span class="cl">    <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Enter an amount between </span><span class="se">\\</span><span class="s2">$1 and </span><span class="se">\\</span><span class="s2">$10&#34;</span><span class="p">,</span> <span class="c1"># Help text for users</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Generate the Stripe checkout session URL using the amount and user&#39;s email</span>
+</span></span><span class="line"><span class="cl"><span class="n">checkout_url</span> <span class="o">=</span> <span class="n">create_checkout_session</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">experimental_user</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Provide a link for the user to start the checkout process</span>
+</span></span><span class="line"><span class="cl"><span class="n">st</span><span class="o">.</span><span class="n">link_button</span><span class="p">(</span><span class="s2">&#34;Buy now&#34;</span><span class="p">,</span> <span class="n">checkout_url</span><span class="p">)</span>
+</span></span></code></pre></div><p>This example allows users to enter the amount they wish to purchase (between $1 and $10). Once they select the amount, they can click the &ldquo;Buy now&rdquo; button, which directs them to the Stripe checkout page to complete their purchase.</p>
+<p>You can test the checkout process using <a href="https://docs.stripe.com/testing#cards" target="_blank" rel="noreferrer">Stripe&rsquo;s test cards</a>. These test cards simulate various payment scenarios, allowing you to ensure everything works correctly before going live.</p>
+<h2 id="the-hard-part-stripe-webhooks" class="relative group">The Hard Part, Stripe Webhooks <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#the-hard-part-stripe-webhooks" aria-label="Anchor">#</a></span></h2><h3 id="what-are-stripe-webhooks-why-do-they-exist" class="relative group">What Are Stripe Webhooks, Why Do They Exist? <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#what-are-stripe-webhooks-why-do-they-exist" aria-label="Anchor">#</a></span></h3><p>Stripe webhooks are user-defined HTTP callbacks that allow your application to receive real-time notifications about events occurring in your Stripe account. When specific actions happen — such as a successful payment — Stripe sends an HTTP POST request to a URL you configure, containing details about the event.</p>
+<p>But why? The reason webhooks exist is to make sure your app stays in sync with Stripe. For example, after a user completes a payment, you might want to update their account or grant credits. But if you only rely on the success page URL to handle this, there’s a chance the user could close the browser or lose internet connection before your app completes the action.</p>
+<p>Webhooks let you handle payment events directly on your server, regardless of whether the user is still on the success page or not. This ensures your system processes payments accurately and consistently.</p>
+<h3 id="going-serverless" class="relative group">Going Serverless <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#going-serverless" aria-label="Anchor">#</a></span></h3><p>So, we need to listen to webhooks. That means we need something running on a server. But here’s the catch: if we’re deploying on community cloud (<a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/deploying-your-app/">yes we will</a>), we can’t just run server code.</p>
+<p>Here are two options:</p>
+<ul>
+<li><strong>Deploy elsewhere</strong> – Sure, you could set up a server with another provider to handle webhooks. But that brings its own set of headaches: managing servers, scaling, security, costs&hellip; you get it.</li>
+<li><strong>Use a serverless function</strong> – This is where serverless comes in. With a serverless function, you don’t need to manage servers at all. You just write the function, deploy it, and it runs when triggered (like when Stripe sends a webhook). It scales automatically, and you only pay for when it’s running. Super efficient!</li>
+</ul>
+<p>Okay, but what’s a serverless function exactly? Well, it&rsquo;s a piece of code you&rsquo;re giving to a cloud provider so you can run code without worrying about the infrastructure. You don’t have to set up or maintain a server. The cloud provider does all that work for you — they run your function, scale it when needed, and only charge you for the time your code runs.</p>
+<div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
+  <span class="pe-3 text-primary-400">
+    <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
+</span>
+  </span>
+  <span class="dark:text-neutral-300">Serverless functions are only serverless in the sense that <strong>you don&rsquo;t have to deal with the server</strong>, but it does exist!</span>
+</div>
 
-## Requirements
+<h4 id="choosing-a-provider" class="relative group">Choosing a provider <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#choosing-a-provider" aria-label="Anchor">#</a></span></h4><p>Now, which provider to choose? There are a lot of options: <strong>AWS Lambda</strong>, <strong>Google Cloud Functions</strong>, and others. AWS Lambda is popular, but it can be a bit much for simple use cases.</p>
+<p>But what if I told you that you already have a provider? <strong>Supabase</strong>! Supabase offers <em>edge functions</em>. Don&rsquo;t worry! It&rsquo;s just a fancy name for a special kind of serverless functions, that live on servers all over the world to be closer to the users (on the <em>edge</em> of the network) and enable faster processing times. By using Supabase, we can easily integrate our code with our existing database. No need to jump between different services — it’s all in one place.</p>
+<h3 id="writing-the-webhook-handler" class="relative group">Writing The Webhook Handler <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#writing-the-webhook-handler" aria-label="Anchor">#</a></span></h3><p>So, we can run code on the cloud, but now we need the code! This part is an adapted version of <a href="https://supabase.com/docs/guides/functions/examples/stripe-webhooks" target="_blank" rel="noreferrer">Supabase&rsquo;s official tutorial</a>, go check it out if you want. First, let&rsquo;s set up our supabase edge function:</p>
+<ul>
+<li><a href="https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&amp;platform=macos#installing-the-supabase-cli" target="_blank" rel="noreferrer">Install the Supabase CLI</a></li>
+<li>Move to your project&rsquo;s directory and <strong>create a new edge function</strong> with <code>supabase functions new stripe-webhook</code></li>
+</ul>
+<p>This will create a <code>supabase</code> folder in your project, inside of which you will find <code>functions/stripe-webhook/index.ts</code>. This is where we will write the code we will put on the <em>edge</em>.</p>
+<p>First of all, we need to talk to Stripe and Supabase, so we <strong>import their libraries.</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span></code></pre></div><p>Here, we’re pulling in the Stripe library (from a CDN) and Supabase’s client. These imports let us call Stripe’s API and interact with our Supabase database later on.</p>
+<p>Then, we need to <strong>initialize Stripe with our API key.</strong></p>
+<!-- markdownlint-disable MD034 MD046 -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="hl"><span class="lnt">5
+</span></span><span class="hl"><span class="lnt">6
+</span></span><span class="hl"><span class="lnt">7
+</span></span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line hl"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Here, we create a <code>stripe</code> instance using our API key (stored in an environment variable, which we will discuss later) and specify the API version.</p>
+<p>Now, we want to <strong>set up a server</strong> that listens for incoming webhooks from Stripe.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="hl"><span class="lnt"> 9
+</span></span><span class="hl"><span class="lnt">10
+</span></span><span class="hl"><span class="lnt">11
+</span></span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;&lt;https://esm.sh/stripe@14.25.0?target=denonext&gt;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">  <span class="c1">// Our webhook handling code will go here.
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Using Deno’s built-in serve function, we set up an HTTP server. Every time Stripe sends a webhook, this function gets triggered with the incoming request.</p>
+<p>Before processing the webhook, we need to <strong>confirm that the request is really from Stripe.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="hl"><span class="lnt"> 8
+</span></span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="hl"><span class="lnt">11
+</span></span><span class="hl"><span class="lnt">12
+</span></span><span class="hl"><span class="lnt">13
+</span></span><span class="hl"><span class="lnt">14
+</span></span><span class="hl"><span class="lnt">15
+</span></span><span class="hl"><span class="lnt">16
+</span></span><span class="hl"><span class="lnt">17
+</span></span><span class="hl"><span class="lnt">18
+</span></span><span class="hl"><span class="lnt">19
+</span></span><span class="hl"><span class="lnt">20
+</span></span><span class="hl"><span class="lnt">21
+</span></span><span class="hl"><span class="lnt">22
+</span></span><span class="hl"><span class="lnt">23
+</span></span><span class="hl"><span class="lnt">24
+</span></span><span class="hl"><span class="lnt">25
+</span></span><span class="hl"><span class="lnt">26
+</span></span><span class="hl"><span class="lnt">27
+</span></span><span class="hl"><span class="lnt">28
+</span></span><span class="hl"><span class="lnt">29
+</span></span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line hl"><span class="cl"><span class="kr">const</span> <span class="nx">cryptoProvider</span> <span class="o">=</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createSubtleCryptoProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">  <span class="c1">// First step is to verify the event. The .text() method must be used as the
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>  <span class="c1">// verification relies on the raw request body rather than the parsed JSON.
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+</span></span><span class="line hl"><span class="cl">  <span class="kd">let</span> <span class="nx">receivedEvent</span>
+</span></span><span class="line hl"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">      <span class="nx">receivedEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">stripe</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">constructEventAsync</span><span class="p">(</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">body</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">signature</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SIGNING_SECRET&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">        <span class="kc">undefined</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">cryptoProvider</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Unknown error occurred&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line hl"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>In this code:</p>
+<ul>
+<li>We extract the Stripe-Signature from the request headers.</li>
+<li>We read the raw request body (using .text()) because verification needs the unaltered data.</li>
+<li>We call constructEventAsync with our body, signature, webhook secret (from env variables), and crypto provider.</li>
+<li>If verification fails, we catch the error and return a 400 response.</li>
+</ul>
+<p>Now that we’ve verified the webhook, we only want to <strong>act on events indicating a successful checkout.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="hl"><span class="lnt">31
+</span></span><span class="hl"><span class="lnt">32
+</span></span><span class="hl"><span class="lnt">33
+</span></span><span class="hl"><span class="lnt">34
+</span></span><span class="hl"><span class="lnt">35
+</span></span><span class="hl"><span class="lnt">36
+</span></span><span class="hl"><span class="lnt">37
+</span></span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cryptoProvider</span> <span class="o">=</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createSubtleCryptoProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// First step is to verify the event. The .text() method must be used as the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// verification relies on the raw request body rather than the parsed JSON.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">receivedEvent</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">receivedEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">stripe</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">constructEventAsync</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">signature</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SIGNING_SECRET&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">undefined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cryptoProvider</span>
+</span></span><span class="line"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Unknown error occurred&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl">  <span class="c1">// Once the event has been verified, we can handle it based on its type.
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">receivedEvent</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">&#39;checkout.session.completed&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">receivedEvent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="kt">object</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">    <span class="kr">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">customer_email</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">    <span class="kr">const</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">amount_total</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">    <span class="c1">/// Continue processing the payment
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>Here, we check if the event type is <code>checkout.session.completed</code>. If it is, we extract important details: the customer&rsquo;s email and the payment amount. We’ll use these details to update the user&rsquo;s credits.</p>
+<p>We need to connect to our Supabase database so we can update the user&rsquo;s credits, but first <strong>we must sign in.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="hl"><span class="lnt">37
+</span></span><span class="hl"><span class="lnt">38
+</span></span><span class="hl"><span class="lnt">39
+</span></span><span class="hl"><span class="lnt">40
+</span></span><span class="hl"><span class="lnt">41
+</span></span><span class="hl"><span class="lnt">42
+</span></span><span class="hl"><span class="lnt">43
+</span></span><span class="hl"><span class="lnt">44
+</span></span><span class="hl"><span class="lnt">45
+</span></span><span class="hl"><span class="lnt">46
+</span></span><span class="hl"><span class="lnt">47
+</span></span><span class="hl"><span class="lnt">48
+</span></span><span class="hl"><span class="lnt">49
+</span></span><span class="hl"><span class="lnt">50
+</span></span><span class="hl"><span class="lnt">51
+</span></span><span class="hl"><span class="lnt">52
+</span></span><span class="hl"><span class="lnt">53
+</span></span><span class="hl"><span class="lnt">54
+</span></span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cryptoProvider</span> <span class="o">=</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createSubtleCryptoProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// First step is to verify the event. The .text() method must be used as the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// verification relies on the raw request body rather than the parsed JSON.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">receivedEvent</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">receivedEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">stripe</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">constructEventAsync</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">signature</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SIGNING_SECRET&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">undefined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cryptoProvider</span>
+</span></span><span class="line"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Unknown error occurred&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Once the event has been verified, we can handle it based on its type.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">receivedEvent</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">&#39;checkout.session.completed&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">receivedEvent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="kt">object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">customer_email</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">amount_total</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl">    <span class="kr">const</span> <span class="nx">supabase</span> <span class="o">=</span> <span class="nx">createClient</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_URL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_ANON_KEY&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">      <span class="c1">// First, sign in with the correct credentials to see the data
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">error</span>: <span class="kt">loginError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">signInWithPassword</span><span class="p">({</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">email</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;EMAIL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">        <span class="nx">password</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line hl"><span class="cl">      
+</span></span><span class="line hl"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">loginError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">throw</span> <span class="nx">loginError</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="c1">// Continue with fetching and updating user data...
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error updating user credits for user </span><span class="si">${</span><span class="nx">userEmail</span><span class="si">}</span><span class="sb">:`</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Failed to update user credits&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">500</span> <span class="p">});</span>
+</span></span><span class="line hl"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>We create a Supabase client using our URL and anon key.</li>
+<li>Then, we sign in using our service account’s credentials (stored in our environment).</li>
+<li>If the sign-in fails, we log the error and return a 500 response, halting further processing.</li>
+</ul>
+<p>Now, we need to <strong>fetch the user’s current credits, add the amount from the Stripe session, and update the record.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="hl"><span class="lnt">50
+</span></span><span class="hl"><span class="lnt">51
+</span></span><span class="hl"><span class="lnt">52
+</span></span><span class="hl"><span class="lnt">53
+</span></span><span class="hl"><span class="lnt">54
+</span></span><span class="hl"><span class="lnt">55
+</span></span><span class="hl"><span class="lnt">56
+</span></span><span class="hl"><span class="lnt">57
+</span></span><span class="hl"><span class="lnt">58
+</span></span><span class="hl"><span class="lnt">59
+</span></span><span class="hl"><span class="lnt">60
+</span></span><span class="hl"><span class="lnt">61
+</span></span><span class="hl"><span class="lnt">62
+</span></span><span class="hl"><span class="lnt">63
+</span></span><span class="hl"><span class="lnt">64
+</span></span><span class="hl"><span class="lnt">65
+</span></span><span class="hl"><span class="lnt">66
+</span></span><span class="hl"><span class="lnt">67
+</span></span><span class="hl"><span class="lnt">68
+</span></span><span class="hl"><span class="lnt">69
+</span></span><span class="hl"><span class="lnt">70
+</span></span><span class="hl"><span class="lnt">71
+</span></span><span class="hl"><span class="lnt">72
+</span></span><span class="hl"><span class="lnt">73
+</span></span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cryptoProvider</span> <span class="o">=</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createSubtleCryptoProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// First step is to verify the event. The .text() method must be used as the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// verification relies on the raw request body rather than the parsed JSON.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">receivedEvent</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">receivedEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">stripe</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">constructEventAsync</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">signature</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SIGNING_SECRET&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="kc">undefined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cryptoProvider</span>
+</span></span><span class="line"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Unknown error occurred&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Once the event has been verified, we can handle it based on its type.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">receivedEvent</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">&#39;checkout.session.completed&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">receivedEvent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="kt">object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">customer_email</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">amount_total</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">supabase</span> <span class="o">=</span> <span class="nx">createClient</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_URL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_ANON_KEY&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// First, sign in with the correct credentials to see the data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">error</span>: <span class="kt">loginError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">signInWithPassword</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">email</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;EMAIL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">password</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">loginError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="nx">loginError</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span>: <span class="kt">userData</span><span class="p">,</span> <span class="nx">error</span>: <span class="kt">fetchError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;credits&#39;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">userEmail</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="nx">single</span><span class="p">();</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">fetchError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">throw</span> <span class="nx">fetchError</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="kr">const</span> <span class="nx">currentCredits</span> <span class="o">=</span> <span class="nx">userData</span><span class="o">?</span><span class="p">.</span><span class="nx">credits</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">      <span class="kr">const</span> <span class="nx">newCredits</span> <span class="o">=</span> <span class="nx">currentCredits</span> <span class="o">+</span> <span class="nx">amount</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="c1">// Finally, update with the new total
+</span></span></span><span class="line hl"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">error</span>: <span class="kt">updateError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="nx">update</span><span class="p">({</span> <span class="nx">credits</span>: <span class="kt">newCredits</span> <span class="p">})</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">userEmail</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">updateError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">throw</span> <span class="nx">updateError</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">
+</span></span><span class="line hl"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Updated credits for user </span><span class="si">${</span><span class="nx">userEmail</span><span class="si">}</span><span class="sb"> from </span><span class="si">${</span><span class="nx">currentCredits</span><span class="si">}</span><span class="sb"> to </span><span class="si">${</span><span class="nx">newCredits</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error updating user credits for user </span><span class="si">${</span><span class="nx">userEmail</span><span class="si">}</span><span class="sb">:`</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Failed to update user credits&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">500</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>We query the users table to fetch the current credit balance for the user.</li>
+<li>We calculate the new total by adding the amount from the payment.</li>
+<li>We update the user’s record with the new credit balance.</li>
+<li>A log message confirms the update, which is useful for tracking and debugging.</li>
+</ul>
+<p>After processing the webhook, we need to <strong>let Stripe know everything went well.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="hl"><span class="lnt">80
+</span></span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// Import Stripe and Supabase&#39;s createClient function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">Stripe</span> <span class="kr">from</span> <span class="s1">&#39;https://esm.sh/stripe@14.25.0?target=denonext&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">createClient</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;jsr:@supabase/supabase-js@2&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">stripe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stripe</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">)</span> <span class="kr">as</span> <span class="kt">string</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">apiVersion</span><span class="o">:</span> <span class="s1">&#39;2024-11-20&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cryptoProvider</span> <span class="o">=</span> <span class="nx">Stripe</span><span class="p">.</span><span class="nx">createSubtleCryptoProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deno</span><span class="p">.</span><span class="nx">serve</span><span class="p">(</span><span class="kr">async</span> <span class="p">(</span><span class="nx">request</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// First step is to verify the event. The .text() method must be used as the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// verification relies on the raw request body rather than the parsed JSON.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">signature</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">request</span><span class="p">.</span><span class="nx">text</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">receivedEvent</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">receivedEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">stripe</span><span class="p">.</span><span class="nx">webhooks</span><span class="p">.</span><span class="nx">constructEventAsync</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">body</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">signature</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SIGNING_SECRET&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kc">undefined</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">cryptoProvider</span>
+</span></span><span class="line"><span class="cl">      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span> <span class="k">instanceof</span> <span class="nb">Error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Unknown error occurred&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">400</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Once the event has been verified, we can handle it based on its type.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">receivedEvent</span><span class="p">.</span><span class="kr">type</span> <span class="o">===</span> <span class="s1">&#39;checkout.session.completed&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">receivedEvent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="kt">object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">userEmail</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">customer_email</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">amount_total</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">supabase</span> <span class="o">=</span> <span class="nx">createClient</span><span class="p">(</span><span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_URL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span> <span class="nx">Deno</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="kr">get</span><span class="p">(</span><span class="s1">&#39;SUPABASE_ANON_KEY&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// First, sign in with the correct credentials to see the data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">error</span>: <span class="kt">loginError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">signInWithPassword</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">email</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;EMAIL&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">password</span>: <span class="kt">Deno.env.get</span><span class="p">(</span><span class="s1">&#39;PASSWORD&#39;</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">loginError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="nx">loginError</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span>: <span class="kt">userData</span><span class="p">,</span> <span class="nx">error</span>: <span class="kt">fetchError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;credits&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">userEmail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">single</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">fetchError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="nx">fetchError</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">currentCredits</span> <span class="o">=</span> <span class="nx">userData</span><span class="o">?</span><span class="p">.</span><span class="nx">credits</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">newCredits</span> <span class="o">=</span> <span class="nx">currentCredits</span> <span class="o">+</span> <span class="nx">amount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// Finally, update with the new total
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kr">const</span> <span class="p">{</span> <span class="nx">error</span>: <span class="kt">updateError</span> <span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">supabase</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="kr">from</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">update</span><span class="p">({</span> <span class="nx">credits</span>: <span class="kt">newCredits</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="nx">userEmail</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">updateError</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="nx">updateError</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Updated credits for user </span><span class="si">${</span><span class="nx">userEmail</span><span class="si">}</span><span class="sb"> from </span><span class="si">${</span><span class="nx">currentCredits</span><span class="si">}</span><span class="sb"> to </span><span class="si">${</span><span class="nx">newCredits</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`Error updating user credits for user </span><span class="si">${</span><span class="nx">userEmail</span><span class="si">}</span><span class="sb">:`</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Failed to update user credits&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">500</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line hl"><span class="cl">  <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="nx">ok</span>: <span class="kt">true</span> <span class="p">}),</span> <span class="p">{</span> <span class="nx">status</span>: <span class="kt">200</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>If everything is processed without errors, we return a JSON response with <code>{ ok: true }</code> and a <code>200</code> status code. This tells Stripe that we’ve handled the webhook successfully.</p>
+<h3 id="deploying-the-webhook-handler" class="relative group">Deploying The Webhook Handler <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#deploying-the-webhook-handler" aria-label="Anchor">#</a></span></h3><ol>
+<li>
+<p><strong>Install Docker</strong></p>
+<ul>
+<li>Supabase Edge Functions run in a containerized environment, so you’ll need <strong>Docker</strong> installed on your machine.</li>
+<li>Download and follow the instructions from their <a href="https://www.docker.com" target="_blank" rel="noreferrer">website</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Deploy the Webhook Function</strong></p>
+<ul>
+<li>Do this by running <code>supabase functions deploy --no-verify-jwt stripe-webhook</code>.</li>
+<li>When prompted, select the correct Supabase project.</li>
+<li>The <code>--no-verify-jwt</code> flag ensures that the function runs without authentication, since Stripe doesn’t send a JWT token with its webhooks.</li>
+</ul>
+</li>
+<li>
+<p><strong>Get the Endpoint URL</strong></p>
+<ul>
+<li>Go to your Supabase dashbaord and select your project.</li>
+<li>In the left sidebar click &ldquo;Edge Functions&rdquo;.</li>
+<li>Here you should see the <code>stripe-webhook</code> function we just deployed, and an accompanying <code>URL</code> field, copy its contents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Register the Webhook in Stripe</strong></p>
+<ul>
+<li>Go to your Stripe Dashboard.</li>
+<li>In the left sidebar, down at the bottom, click &ldquo;Developers &gt; Webhooks&rdquo;.</li>
+<li>Click &ldquo;Add destination&rdquo;.</li>
+<li>Under &ldquo;Events,&rdquo; select <code>checkout.session.completed</code>, click &ldquo;Continue&rdquo;.</li>
+<li>For &ldquo;Destination types,&rdquo; select &ldquo;Webhook endpoint&rdquo;, click &ldquo;Continue&rdquo;.</li>
+<li>Under &ldquo;Endpoint URL,&rdquo; paste the previously copied URL from Supabase and click &ldquo;Create destination&rdquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong>Setup the Environment Variables</strong></p>
+<ul>
+<li>Still in Stripe, get the &ldquo;Signing secret&rdquo; visible on the right-hand side when you select the event destination we just set up.</li>
+<li>Create a <code>.env</code> file in <code>functions/stripe-webhook</code> that should look like this:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-.toml" data-lang=".toml"><span class="line"><span class="cl"><span class="nx">STRIPE_API_KEY</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">STRIPE_WEBHOOK_SIGNING_SECRET</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">//</span> <span class="nx">The</span> <span class="nx">email</span> <span class="nx">and</span> <span class="nx">password</span> <span class="nx">combo</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">Supabase</span> <span class="nx">user</span> <span class="nx">you</span> <span class="nx">set</span> <span class="nx">up</span> <span class="nx">previously</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">//</span> <span class="nx">If</span> <span class="nx">you</span> <span class="nx">followed</span> <span class="nx">the</span> <span class="nx">previous</span> <span class="nx">guide</span><span class="p">,</span> <span class="nx">they</span> <span class="nx">should</span> <span class="nx">be</span> <span class="nx">present</span> <span class="nx">in</span> <span class="nx">your</span> <span class="p">.</span><span class="nx">streamlit</span><span class="err">/</span><span class="nx">secrets</span><span class="p">.</span><span class="nx">toml</span> <span class="nx">file</span>
+</span></span><span class="line"><span class="cl"><span class="nx">EMAIL</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">PASSWORD</span><span class="p">=</span><span class="s2">&#34;xxxx&#34;</span>
+</span></span></code></pre></div><div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
+  <span class="pe-3 text-primary-400">
+    <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
+</span>
+  </span>
+  <span class="dark:text-neutral-300">Add this file to <code>.gitignore</code> to prevent exposing secrets in your repo!</span>
+</div>
 
-add login + database
+<ul>
+<li>Send this file to Supabase by running <code>supabase secrets set --env-file ./supabase/functions/stripe-webhook/.env</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="testing-your-payment-workflow" class="relative group">Testing Your Payment Workflow <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#testing-your-payment-workflow" aria-label="Anchor">#</a></span></h2><p>Alright, time to make sure everything is working! We’ll check if the user’s credit balance updates after a successful payment.</p>
+<p>First, let’s get the user’s current balance from our database:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_user_credits</span><span class="p">(</span><span class="n">conn</span><span class="p">:</span> <span class="n">SupabaseConnection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Get the current user&#39;s credit balance.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        conn: Supabase connection
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Returns:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        int: User&#39;s credit balance in cents
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">execute_query</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&#34;users&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;credits&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&#34;email&#34;</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">experimental_user</span><span class="o">.</span><span class="n">email</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ttl</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&#34;credits&#34;</span><span class="p">]</span>
+</span></span></code></pre></div><p>Now, let&rsquo;s show the user their current balance in a nice, simple UI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Credit Balance&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;$</span><span class="si">{</span><span class="n">user_credits</span> <span class="o">/</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>  <span class="c1"># Convert cents to dollars</span>
+</span></span><span class="line"><span class="cl">    <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Your credit balance will be consumed as you use the app.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>This displays the balance in dollars instead of cents, making it more readable.</p>
+<p>Finally, run a test payment using one of Stripe&rsquo;s <a href="https://docs.stripe.com/testing#cards" target="_blank" rel="noreferrer">test cards</a>, complete the checkout session and you should be automatically redirected to your Streamlit app, with the updated balance showing up!</p>
+<p>If it doesn’t update, check your Supabase logs and Stripe dashboard for any webhook errors.</p>
+<h2 id="next-steps" class="relative group">Next Steps <span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100"><a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" style="text-decoration-line: none !important;" href="#next-steps" aria-label="Anchor">#</a></span></h2><p>Now that payments are working and credits update correctly, it&rsquo;s time to put them to use! Next, we&rsquo;ll <a href="http://localhost:1313/blog/posts/credit-based-payment-system-streamlit-generative-ai/calling-llm-apis/">connect to an LLM API</a> and track usage, making sure credits are deducted as the user interacts with the model.</p>
+<div class="flex rounded-md bg-primary-100 px-4 py-3 dark:bg-primary-900">
+  <span class="pe-3 text-primary-400">
+    <span class="icon relative inline-block px-1 align-text-bottom"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7L272 415.1h-160L112.1 454.3zM191.4 .0132C89.44 .3257 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8c16.53 18.84 42.34 58.23 52.22 91.45c.0313 .25 .0938 .5166 .125 .7823h160.2c.0313-.2656 .0938-.5166 .125-.7823c9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1C368 78.61 288.9-.2837 191.4 .0132zM192 96.01c-44.13 0-80 35.89-80 79.1C112 184.8 104.8 192 96 192S80 184.8 80 176c0-61.76 50.25-111.1 112-111.1c8.844 0 16 7.159 16 16S200.8 96.01 192 96.01z"/></svg>
+</span>
+  </span>
+  <span class="dark:text-neutral-300">Want to see an example? <a href="https://fastprompt.streamlit.app/" target="_blank" rel="noreferrer">FastPrompt</a> uses a credit system for monetisation - it generates high quality LLM system prompts from a simple description of inputs outputs. You can refine it with AI suggestions and iterate quickly.</span>
+</div>
 
-`pip install stripe`
-
-test mode vs. production mode as an alert
-
-## Integrate Stripe Checkouts
-
-### Configuring Your Stripe Account
-
-- "Settings > Payment methods", deactivate buy now pay later
-- "Setting > Business > Branding > Checkout & Payment links", on the left add icon and logo, change your brand colors
-
-### Calling The API
-
-secrets.toml
-
-```toml
-API_KEY = "xxxx"
-SUCCESS_URL = "http://localhost:8501"
-```
-
-## Testing Your Stripe Setup
-
-test mode vs. production mode
-
-## The Hard Part, Stripe Webhooks
-
-### What Are Stripe Webhooks, Why Do They Exist?
-
-### Going Serverless - Choosing A Provider
-
-### Writing The Webhook Handler
-
-- Install the supabase CLI
-- Create a new function with `supabase functions new stripe-webhook`
-- Use the following code for the function
-
-    ```typescript
-    // Import via bare specifier thanks to the import_map.json file.
-    import Stripe from 'https://esm.sh/stripe@14.25.0?target=denonext'
-    import { createClient } from 'jsr:@supabase/supabase-js@2'
-
-    const stripe = new Stripe(Deno.env.get('STRIPE_API_KEY') as string, {
-        // This is needed to use the Fetch API rather than relying on the Node http
-        // package.
-        apiVersion: '2024-11-20'
-    })
-    // This is needed in order to use the Web Crypto API in Deno.
-    const cryptoProvider = Stripe.createSubtleCryptoProvider()
-
-    Deno.serve(async (request) => {
-        const signature = request.headers.get('Stripe-Signature')
-
-        // First step is to verify the event. The .text() method must be used as the
-        // verification relies on the raw request body rather than the parsed JSON.
-        const body = await request.text()
-        let receivedEvent
-        try {
-            receivedEvent = await stripe.webhooks.constructEventAsync(
-            body,
-            signature!,
-            Deno.env.get('STRIPE_WEBHOOK_SIGNING_SECRET')!,
-            undefined,
-            cryptoProvider
-            )
-        } catch (err) {
-            if (err instanceof Error) {
-            return new Response(err.message, { status: 400 })
-            }
-            return new Response('Unknown error occurred', { status: 400 })
-        }
-
-        // Once the event has been verified, we can handle it based on its type.
-        if (receivedEvent.type === 'checkout.session.completed') {
-            const session = receivedEvent.data.object;
-            const userEmail = session.customer_email;
-            const amount = session.amount_total;
-
-            const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_ANON_KEY')!)
-
-            try {
-            // First, sign in with the correct credentials to see the data
-            const { error: loginError } = await supabase.auth.signInWithPassword({
-                email: Deno.env.get('EMAIL')!,
-                password: Deno.env.get('PASSWORD')!,
-            });
-            
-            if (loginError) {
-                throw loginError;
-            }
-
-            // Then, get the current credits of the user
-            const { data: userData, error: fetchError } = await supabase
-                .from('users')
-                .select('credits')
-                .eq('email', userEmail)
-                .single();
-
-            if (fetchError) {
-                throw fetchError;
-            }
-
-            const currentCredits = userData?.credits || 0;
-            const newCredits = currentCredits + amount;
-
-            // Finally, update with the new total
-            const { error: updateError } = await supabase
-                .from('users')
-                .update({ credits: newCredits })
-                .eq('email', userEmail);
-
-            if (updateError) {
-                throw updateError;
-            }
-
-            console.log(`Updated credits for user ${userEmail} from ${currentCredits} to ${newCredits}`);
-            } catch (error) {
-            console.error(`Error updating user credits for user ${userEmail}:`, error);
-            return new Response('Failed to update user credits', { status: 500 });
-            }
-        }
-        
-        return new Response(JSON.stringify({ ok: true }), { status: 200 })
-    });
-    ```
-
-Explain code
-
-- Install Docker
-- Run `supabase functions deploy --no-verify-jwt stripe-webhook`, choose the correct project
-- Go to Supabase, copy the endpoint URL
-
-- Go to Stripe
-- In the left sidebar, click "Developpers > Webhooks" at the bottom.
-  - Click "Add destination"
-  - Keep as is, for event select `checkout.session.completed`
-  - Select `webhook endpoint`
-  - Paste the endpoint URL
-  - Click "Create destination"
-- Copy the "Signing secret" on the right-hand side
-- Create a `.env` file in `functions/stripe-webhook`, MAKE SURE TO ADD IT TO GITIGNORE
-- Add your stripe api key and webhook signing secret:
-
-```.env
-STRIPE_API_KEY="xxxx"
-STRIPE_WEBHOOK_SIGNING_SECRET="xxxx"
-EMAIL="xxxx"
-PASSWORD="xxxx"
-```
-
-- Give supabase your secrets `supabase secrets set --env-file ./supabase/functions/stripe-webhook/.env`
-
-### Connecting To The Database
-
-## Testing Your Payment Workflow
-
-## Next Steps -->
 
       </div>
     </section>
@@ -705,19 +1455,19 @@ PASSWORD="xxxx"
       
       
       <img
-        width="1280"
-        height="1280"
+        width="1066"
+        height="1066"
         class="!mb-0 !mt-0 me-4 w-24 h-auto rounded-full"
         alt="Antoine Basseto"
         loading="lazy" decoding="async"
         
-          src="/blog/img/author_hu_efce727fd097ceb8.jpeg"
-          srcset="/blog/img/author_hu_4457cb9beae7fb0d.jpeg 330w,/blog/img/author_hu_efce727fd097ceb8.jpeg 660w
+          src="/blog/img/author_hu_7dc8b0211b22a974.jpeg"
+          srcset="/blog/img/author_hu_63a9056de708c48e.jpeg 330w,/blog/img/author_hu_7dc8b0211b22a974.jpeg 660w
           
-            ,/blog/img/author_hu_b1bcf89c40f8e56.jpeg 1024w
+            ,/blog/img/author_hu_b0d4f0237331db2e.jpeg 1024w
           
           
-            ,/blog/img/author.jpeg 1280w
+            ,/blog/img/author.jpeg 1066w
           "
           sizes="100vw"
         

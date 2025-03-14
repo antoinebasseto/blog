@@ -33,6 +33,9 @@ streamlit cloud
 
 ## Preparing Your App For Deployment
 
+Setup git repo
+`pip freeze > requirements.txt`
+
 ### Configuring Your Deployment Environment
 
 Need to change:
@@ -41,10 +44,14 @@ Need to change:
   - status
   - authorized uris
 
+- Deploy to streamlit, check domain is available, copy URL
+
 - Go to google cloud platform
 - Left sidebar, click "APIs and Service > OAuth Consent Screen"
 - Click "Audience"
 - Click "Publish App"
+- Go to "Clients", click on your client
+- Add your app's URL to the authorized thingies
 
 - Stripe
   - api keys
