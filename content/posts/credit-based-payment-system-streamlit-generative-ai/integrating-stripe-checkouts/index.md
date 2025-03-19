@@ -597,7 +597,7 @@ def get_user_credits(conn: SupabaseConnection) -> int:
     """
     return execute_query(
         conn.table("users").select("credits").eq("email", st.experimental_user.email),
-        ttl=None,
+        ttl=0,
     ).data[0]["credits"]
 ```
 
@@ -606,7 +606,7 @@ Now, let's show the user their current balance in a nice, simple UI:
 ```python
 st.metric(
     "Credit Balance",
-    f"${user_credits / 100:.2f}",  # Convert cents to dollars
+    f"${get_user_credits(conn) / 100:.2f}",  # Convert cents to dollars
     help="Your credit balance will be consumed as you use the app.",
 )
 ```

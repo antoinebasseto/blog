@@ -1404,12 +1404,12 @@
 </span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">execute_query</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&#34;users&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&#34;credits&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s2">&#34;email&#34;</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">experimental_user</span><span class="o">.</span><span class="n">email</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ttl</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ttl</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&#34;credits&#34;</span><span class="p">]</span>
 </span></span></code></pre></div><p>Now, let&rsquo;s show the user their current balance in a nice, simple UI:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="s2">&#34;Credit Balance&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;$</span><span class="si">{</span><span class="n">user_credits</span> <span class="o">/</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>  <span class="c1"># Convert cents to dollars</span>
+</span></span><span class="line"><span class="cl">    <span class="sa">f</span><span class="s2">&#34;$</span><span class="si">{</span><span class="n">get_user_credits</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>  <span class="c1"># Convert cents to dollars</span>
 </span></span><span class="line"><span class="cl">    <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Your credit balance will be consumed as you use the app.&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre></div><p>This displays the balance in dollars instead of cents, making it more readable.</p>
@@ -1655,7 +1655,7 @@
                 >
                 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
                   
-                    <time datetime="0001-01-01 00:00:00 &#43;0000 UTC">1 January 0001</time>
+                    <time datetime="2025-03-18 00:00:00 &#43;0000 UTC">18 March 2025</time>
                   
                 </span>
               </span>
