@@ -170,7 +170,7 @@ Caching is a handy way to boost performance by temporarily storing data so you d
 With a database in place, we can read and write credits for each of our users. Next, we’ll look at how to [integrate Stripe]({{<ref "/posts/credit-based-payment-system-streamlit-generative-ai/integrating-stripe-checkouts">}}).
 
 {{<alert "lightbulb">}}
-Want to see an example? [SimplyPlot](https://simplyplot.streamlit.app/) uses a credit system for monetisation - it writes Matplotlib code for you, so you can stop troubleshooting your plots.
+Want to see an example? [FastPrompt](https://fastprompt.streamlit.app/) uses a credit system for monetisation - it generates high quality LLM system prompts from a simple description of inputs outputs. You can refine it with AI suggestions and iterate quickly.
 {{</alert>}}
 
 **Get updates & insights!**
